@@ -1,0 +1,491 @@
+{
+  "routes": [
+    {
+      "country_crossed": false,
+      "weight_name": "auto",
+      "weight": 113.116,
+      "duration": 84.345,
+      "distance": 399.232,
+      "legs": [
+        {
+          "via_waypoints": [],
+          "admins": [
+            {
+              "iso_3166_1_alpha3": "USA",
+              "iso_3166_1": "US"
+            }
+          ],
+          "weight": 113.116,
+          "duration": 84.345,
+          "steps": [
+            {
+              "intersections": [
+                {
+                  "entry": [
+                    true
+                  ],
+                  "bearings": [
+                    326
+                  ],
+                  "duration": 40.547,
+                  "mapbox_streets_v8": {
+                    "class": "street"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 0,
+                  "weight": 45.616,
+                  "geometry_index": 0,
+                  "location": [
+                    -74.083757,
+                    40.697549
+                  ]
+                },
+                {
+                  "entry": [
+                    false,
+                    false,
+                    false,
+                    true
+                  ],
+                  "in": 1,
+                  "bearings": [
+                    46,
+                    146,
+                    227,
+                    328
+                  ],
+                  "duration": 1.524,
+                  "turn_weight": 2,
+                  "turn_duration": 0.008,
+                  "mapbox_streets_v8": {
+                    "class": "street"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 3,
+                  "weight": 3.743,
+                  "geometry_index": 1,
+                  "location": [
+                    -74.085187,
+                    40.699141
+                  ]
+                },
+                {
+                  "bearings": [
+                    148,
+                    328
+                  ],
+                  "entry": [
+                    false,
+                    true
+                  ],
+                  "in": 0,
+                  "turn_weight": 1,
+                  "mapbox_streets_v8": {
+                    "class": "street"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 1,
+                  "geometry_index": 2,
+                  "location": [
+                    -74.085238,
+                    40.699202
+                  ]
+                }
+              ],
+              "maneuver": {
+                "type": "depart",
+                "instruction": "Drive northwest on Eastern Parkway.",
+                "bearing_after": 326,
+                "bearing_before": 0,
+                "location": [
+                  -74.083757,
+                  40.697549
+                ]
+              },
+              "name": "Eastern Parkway",
+              "duration": 42.191,
+              "distance": 223.894,
+              "driving_side": "right",
+              "weight": 50.497,
+              "mode": "driving",
+              "geometry": {
+                "coordinates": [
+                  [
+                    -74.083757,
+                    40.697549
+                  ],
+                  [
+                    -74.085187,
+                    40.699141
+                  ],
+                  [
+                    -74.085238,
+                    40.699202
+                  ],
+                  [
+                    -74.085247,
+                    40.699213
+                  ]
+                ],
+                "type": "LineString"
+              }
+            },
+            {
+              "intersections": [
+                {
+                  "entry": [
+                    true,
+                    false,
+                    true
+                  ],
+                  "in": 1,
+                  "bearings": [
+                    47,
+                    148,
+                    228
+                  ],
+                  "duration": 6.873,
+                  "turn_weight": 12.5,
+                  "turn_duration": 1.113,
+                  "mapbox_streets_v8": {
+                    "class": "tertiary"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 0,
+                  "weight": 19.124,
+                  "geometry_index": 3,
+                  "location": [
+                    -74.085247,
+                    40.699213
+                  ]
+                },
+                {
+                  "entry": [
+                    true,
+                    false,
+                    true
+                  ],
+                  "in": 1,
+                  "bearings": [
+                    48,
+                    227,
+                    311
+                  ],
+                  "duration": 16.327,
+                  "turn_weight": 0.75,
+                  "turn_duration": 0.007,
+                  "mapbox_streets_v8": {
+                    "class": "tertiary"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 0,
+                  "weight": 19.11,
+                  "geometry_index": 4,
+                  "location": [
+                    -74.084898,
+                    40.699458
+                  ]
+                },
+                {
+                  "bearings": [
+                    45,
+                    165,
+                    228,
+                    344
+                  ],
+                  "entry": [
+                    true,
+                    false,
+                    false,
+                    false
+                  ],
+                  "in": 2,
+                  "turn_weight": 1.5,
+                  "turn_duration": 0.022,
+                  "mapbox_streets_v8": {
+                    "class": "tertiary"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 0,
+                  "geometry_index": 5,
+                  "location": [
+                    -74.084293,
+                    40.699866
+                  ]
+                }
+              ],
+              "maneuver": {
+                "type": "end of road",
+                "instruction": "Turn right onto Ocean Avenue.",
+                "modifier": "right",
+                "bearing_after": 47,
+                "bearing_before": 328,
+                "location": [
+                  -74.085247,
+                  40.699213
+                ]
+              },
+              "name": "Ocean Avenue",
+              "duration": 24.663,
+              "distance": 114.592,
+              "driving_side": "right",
+              "weight": 41.354,
+              "mode": "driving",
+              "geometry": {
+                "coordinates": [
+                  [
+                    -74.085247,
+                    40.699213
+                  ],
+                  [
+                    -74.084898,
+                    40.699458
+                  ],
+                  [
+                    -74.084293,
+                    40.699866
+                  ],
+                  [
+                    -74.084242,
+                    40.699905
+                  ]
+                ],
+                "type": "LineString"
+              }
+            },
+            {
+              "intersections": [
+                {
+                  "mapbox_streets_v8": {
+                    "class": "street"
+                  },
+                  "location": [
+                    -74.084242,
+                    40.699905
+                  ],
+                  "geometry_index": 6,
+                  "admin_index": 0,
+                  "weight": 8.856,
+                  "is_urban": true,
+                  "traffic_signal": true,
+                  "turn_duration": 7.393,
+                  "turn_weight": 7,
+                  "duration": 9.043,
+                  "bearings": [
+                    53,
+                    163,
+                    225,
+                    344
+                  ],
+                  "out": 1,
+                  "in": 2,
+                  "entry": [
+                    true,
+                    true,
+                    false,
+                    false
+                  ]
+                },
+                {
+                  "entry": [
+                    false,
+                    true,
+                    false,
+                    false
+                  ],
+                  "in": 3,
+                  "bearings": [
+                    51,
+                    145,
+                    232,
+                    343
+                  ],
+                  "duration": 5.177,
+                  "turn_weight": 2,
+                  "turn_duration": 0.077,
+                  "mapbox_streets_v8": {
+                    "class": "street"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 1,
+                  "weight": 7.738,
+                  "geometry_index": 7,
+                  "location": [
+                    -74.084203,
+                    40.69981
+                  ]
+                },
+                {
+                  "bearings": [
+                    145,
+                    235,
+                    325
+                  ],
+                  "entry": [
+                    true,
+                    true,
+                    false
+                  ],
+                  "in": 2,
+                  "turn_weight": 1,
+                  "turn_duration": 0.007,
+                  "mapbox_streets_v8": {
+                    "class": "street"
+                  },
+                  "is_urban": true,
+                  "admin_index": 0,
+                  "out": 0,
+                  "geometry_index": 8,
+                  "location": [
+                    -74.08397,
+                    40.699558
+                  ]
+                }
+              ],
+              "maneuver": {
+                "type": "turn",
+                "instruction": "Turn right onto Van Nostrand Avenue.",
+                "modifier": "right",
+                "bearing_after": 163,
+                "bearing_before": 45,
+                "location": [
+                  -74.084242,
+                  40.699905
+                ]
+              },
+              "name": "Van Nostrand Avenue",
+              "duration": 17.491,
+              "distance": 60.745,
+              "driving_side": "right",
+              "weight": 21.265,
+              "mode": "driving",
+              "geometry": {
+                "coordinates": [
+                  [
+                    -74.084242,
+                    40.699905
+                  ],
+                  [
+                    -74.084203,
+                    40.69981
+                  ],
+                  [
+                    -74.08397,
+                    40.699558
+                  ],
+                  [
+                    -74.083865,
+                    40.699445
+                  ]
+                ],
+                "type": "LineString"
+              }
+            },
+            {
+              "intersections": [
+                {
+                  "bearings": [
+                    325
+                  ],
+                  "entry": [
+                    true
+                  ],
+                  "in": 0,
+                  "admin_index": 0,
+                  "geometry_index": 9,
+                  "location": [
+                    -74.083865,
+                    40.699445
+                  ]
+                }
+              ],
+              "maneuver": {
+                "type": "arrive",
+                "instruction": "You have arrived at your destination.",
+                "bearing_after": 0,
+                "bearing_before": 145,
+                "location": [
+                  -74.083865,
+                  40.699445
+                ]
+              },
+              "name": "Van Nostrand Avenue",
+              "duration": 0,
+              "distance": 0,
+              "driving_side": "right",
+              "weight": 0,
+              "mode": "driving",
+              "geometry": {
+                "coordinates": [
+                  [
+                    -74.083865,
+                    40.699445
+                  ],
+                  [
+                    -74.083865,
+                    40.699445
+                  ]
+                ],
+                "type": "LineString"
+              }
+            }
+          ],
+          "distance": 399.232,
+          "summary": "Eastern Parkway, Ocean Avenue"
+        }
+      ],
+      "geometry": {
+        "coordinates": [
+          [
+            -74.083757,
+            40.697549
+          ],
+          [
+            -74.085247,
+            40.699213
+          ],
+          [
+            -74.084242,
+            40.699905
+          ],
+          [
+            -74.084203,
+            40.69981
+          ],
+          [
+            -74.083865,
+            40.699445
+          ]
+        ],
+        "type": "LineString"
+      }
+    }
+  ],
+  "waypoints": [
+    {
+      "distance": 2.697,
+      "name": "Eastern Parkway",
+      "location": [
+        -74.083757,
+        40.697549
+      ]
+    },
+    {
+      "distance": 0.825,
+      "name": "Van Nostrand Avenue",
+      "location": [
+        -74.083865,
+        40.699445
+      ]
+    }
+  ],
+  "code": "Ok",
+  "uuid": "YnncLnk59y2nq-7UVbBRzJbR0eJwEksGGe7lnPW6pQfx1BbhoWL5yw=="
+}

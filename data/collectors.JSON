@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "vehicle_id": 1,
+    "depot_id": 1
+  },
+  {
+    "id": 2,
+    "vehicle_id": 2,
+    "depot_id": 1
+  },
+  {
+    "id": 3,
+    "vehicle_id": 3,
+    "depot_id": 2
+  },
+  {
+    "id": 4,
+    "vehicle_id": 4,
+    "depot_id": 2
+  },
+  {
+    "id": 5,
+    "vehicle_id": 5,
+    "depot_id": 3
+  },
+  {
+    "id": 6,
+    "vehicle_id": 6,
+    "depot_id": 3
+  },
+  {
+    "id": 7,
+    "vehicle_id": 7,
+    "depot_id": 4
+  },
+  {
+    "id": 8,
+    "vehicle_id": 8,
+    "depot_id": 4
+  },
+  {
+    "id": 9,
+    "vehicle_id": 9,
+    "depot_id": 5
+  },
+  {
+    "id": 10,
+    "vehicle_id": 10,
+    "depot_id": 5
+  },
+  {
+    "id": 11,
+    "vehicle_id": 11,
+    "depot_id": 6
+  },
+  {
+    "id": 12,
+    "vehicle_id": 12,
+    "depot_id": 6
+  },
+  {
+    "id": 13,
+    "vehicle_id": 13,
+    "depot_id": 7
+  },
+  {
+    "id": 14,
+    "vehicle_id": 14,
+    "depot_id": 7
+  },
+  {
+    "id": 15,
+    "vehicle_id": 15,
+    "depot_id": 8
+  },
+  {
+    "id": 16,
+    "vehicle_id": 16,
+    "depot_id": 8
+  },
+  {
+    "id": 17,
+    "vehicle_id": 17,
+    "depot_id": 9
+  },
+
+  {
+    "id": 19,
+    "vehicle_id": 19,
+    "depot_id": 10
+  },
+  {
+    "id": 20,
+    "vehicle_id": 20,
+    "depot_id": 10
+  }
+]
