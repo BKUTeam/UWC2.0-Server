@@ -15,3 +15,5 @@ class UserRepository:
                 return collector
         return None
 
+    def get_all_collector(self):
+        return self.collectors
