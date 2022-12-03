@@ -65,6 +65,7 @@ class MapService:
             for free_route in free_routes:
                 if free_route.type == 'OPTIONAL':
                     self.release_route(free_route)
+        return True
 
     def release_route(self, free_route: StoredRoute):
         """
