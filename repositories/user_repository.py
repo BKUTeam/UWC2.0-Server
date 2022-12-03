@@ -17,3 +17,4 @@ class UserRepository:
 
     def get_all_collector(self):
         return self.collectors
+
