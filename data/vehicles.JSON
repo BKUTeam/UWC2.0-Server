@@ -1,6 +1,9 @@
 [
   {
     "id": 1,
+    "car_company: "Howo",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 1,
     "gg_location": "10.79216864217754,106.58160680344825",
     "capacity": 5000,
@@ -9,6 +12,9 @@
   },
   {
     "id": 2,
+    "car_company: "Howo",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 1,
     "gg_location": "10.881117564459464,106.63198455297686",
     "capacity": 5000,
@@ -17,6 +23,9 @@
   },
   {
     "id": 3,
+    "car_company: "Dongfeng",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 2,
     "gg_location": "10.881117564459464,106.63198455297686",
     "capacity": 5000,
@@ -25,6 +34,9 @@
   },
   {
     "id": 4,
+    "car_company: "Isuzu",
+    "vehicle_type": "Dumping garbage truck",
+    "Weight": 6,
     "depot_id": 2,
     "gg_location": "10.901420712262409,106.62498279930146",
     "capacity": 5000,
@@ -33,6 +45,9 @@
   },
   {
     "id": 5,
+    "car_company: "Howo",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 3,
     "gg_location": "10.831609712517988,106.67425172331482",
     "capacity": 5000,
@@ -41,6 +56,9 @@
   },
   {
     "id": 6,
+    "car_company: "Fuso",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 3,
     "gg_location": "10.843265487421593,106.63244717768472",
     "capacity": 5000,
@@ -49,6 +67,9 @@
   },
   {
     "id": 7,
+    "car_company: "Howo",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 4,
     "gg_location": "10.769691169408903,106.66867749618883",
     "capacity": 5000,
@@ -57,6 +78,9 @@
   },
   {
     "id": 8,
+    "car_company: "Isuzu",
+    "vehicle_type": "Dumping garbage truck",
+    "Weight": 6,
     "depot_id": 4,
     "gg_location": "10.799386415307625,106.66867749596429",
     "capacity": 5000,
@@ -65,6 +89,9 @@
   },
   {
     "id": 9,
+    "car_company: "Fuso",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 5,
     "gg_location": "10.881747899309365,106.70603999532895",
     "capacity": 5000,
@@ -73,6 +100,9 @@
   },
   {
     "id": 10,
+    "car_company: "Isuzu",
+    "vehicle_type": "Dumping garbage truck",
+    "Weight": 6,
     "depot_id": 5,
     "gg_location": "10.867954693902137,106.69179024850736",
     "capacity": 5000,
@@ -81,6 +111,9 @@
   },
   {
     "id": 11,
+    "car_company: "Fuso",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 6,
     "gg_location": "10.765242056210962,106.66195651554142",
     "capacity": 5000,
@@ -89,6 +122,9 @@
   },
   {
     "id": 12,
+    "car_company: "Howo",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 6,
     "gg_location": "10.762842,106.682490",
     "capacity": 5000,
@@ -97,6 +133,9 @@
   },
   {
     "id": 13,
+    "car_company: "Huyndai ",
+    "vehicle_type": "Garbage collection truck",
+    "Weight": 6,
     "depot_id": 7,
     "gg_location": "10.787303,106.712077",
     "capacity": 5000,
@@ -105,6 +144,9 @@
   },
   {
     "id": 14,
+    "car_company: "Howo",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 7,
     "gg_location": "10.794882,106.721862",
     "capacity": 5000,
@@ -113,6 +155,9 @@
   },
   {
     "id": 15,
+    "car_company: "Huyndai ",
+    "vehicle_type": "Garbage collection truck",
+    "Weight": 6,
     "depot_id": 8,
     "gg_location": "10.751328,106.621532",
     "capacity": 5000,
@@ -121,6 +166,9 @@
   },
   {
     "id": 16,
+    "car_company: "Dongfeng",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 8,
     "gg_location": "10.734976278314425,106.63537603525646",
     "capacity": 5000,
@@ -129,6 +177,9 @@
   },
   {
     "id": 17,
+    "car_company: "Huyndai ",
+    "vehicle_type": "Garbage collection truck",
+    "Weight": 6,
     "depot_id": 9,
     "gg_location": "10.734003,106.696922",
     "capacity": 5000,
@@ -137,6 +188,9 @@
   },
   {
     "id": 18,
+    "car_company: "Howo",
+    "vehicle_type": "Trash truck",
+    "Weight": 6,
     "depot_id": 9,
     "gg_location": "10.734003,106.696922",
     "capacity": 5000,
@@ -145,6 +199,9 @@
   },
   {
     "id": 19,
+    "car_company: "Thaco",
+    "vehicle_type": "Garbage collection truck",
+    "Weight": 6,
     "depot_id": 10,
     "gg_location": "10.776457,106.755071",
     "capacity": 5000,
@@ -153,6 +210,9 @@
   },
   {
     "id": 20,
+    "car_company: "Thaco",
+    "vehicle_type": "Garbage collection truck",
+    "Weight": 6,
     "depot_id": 10,
     "gg_location": "10.796055,106.740169",
     "capacity": 5000,
