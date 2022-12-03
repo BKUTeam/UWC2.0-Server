@@ -42,7 +42,7 @@ class RouteResource(Resource):
         try:
             collector_id = int(request.args.get('collector-id'))
             routes = map_service.get_optimize_routes_for_collector(collector_id)
-            collector = user_service.get_collector_info_by_id(collector_id)
+            collector = user_service.get_detail_collector_by_id(collector_id)
             print(routes)
             result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
             return json.loads(result)
@@ -66,7 +66,7 @@ class CollectorRoutes(Resource):
     def get(self):
         collector_id = int(request.args.get('collector-id'))
         routes = map_service.get_optimize_routes_for_collector(collector_id)
-        collector = user_service.get_collector_info_by_id(collector_id)
+        collector = user_service.get_detail_collector_by_id(collector_id)
         result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
         return result
 
@@ -86,7 +86,7 @@ class CollectorRoutes(Resource):
 class Collector(Resource):
 
     def get(self):
-        collectors = map_repository.get_all_collectors()
+        collectors = user_service.get_short_information_of_all_collector()
         return collectors
 
 
@@ -94,16 +94,16 @@ class CollectorDetail(Resource):
 
     def get(self, collector_id=None):
         if collector_id is not None:
-            collector = map_repository.get_detail_collector_by_id(collector_id)
+            collector = user_service.get_detail_collector_by_id(collector_id)
             return collector
         else:
-            return map_repository.get_all_collectors()
+            return user_service.get_short_information_of_all_collector()
 
 
 class Janitor(Resource):
 
     def get(self):
-        janitors = map_repository.get_all_janitors()
+        janitors = user_service.get_short_information_of_all_collector()
         return janitors
 
 
@@ -111,10 +111,10 @@ class JanitorDetail(Resource):
 
     def get(self, janitor_id=None):
         if janitor_id is not None:
-            janitor = map_repository.get_detail_janitor_by_id(janitor_id)
+            janitor = user_service.get_detail_janitor_by_id(janitor_id)
             return janitor
         else:
-            return map_repository.get_all_janitors()
+            return user_service.get_short_information_of_all_janitor()
 
 
 class Mcp(Resource):
