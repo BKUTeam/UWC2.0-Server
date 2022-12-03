@@ -58,7 +58,7 @@ class MapRepository:
         return MapRepository.resource(self.janitors_path)
 
     def get_detail_collector_by_id(self, collector_id):
-        collectors =  MapRepository.resource(self.collectors_path)
+        collectors = MapRepository.resource(self.collectors_path)
         for collector in collectors:
             if collector_id == collector.get('id'):
                 return collector
@@ -71,3 +71,5 @@ class MapRepository:
     def get_detail_depot_by_id(self, depot_id):
         pass
 
+    def get_detail_mcp_by_id(self, mcp_id):
+        pass
