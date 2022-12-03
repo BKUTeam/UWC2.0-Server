@@ -19,6 +19,18 @@ class MapRepository:
             resource = json.load(f)
         return resource
 
+    def get_mcp_by_id(self, mcp_id):
+        for mcp in MapRepository.resource(self.mcps_path):
+            if mcp['id'] == mcp_id:
+                return mcp
+        return None
+
+    def get_factory_by_id(self, factory_id):
+        for factory in MapRepository.resource(self.factories_path):
+            if factory['id'] == factory_id:
+                return factory
+        return None
+
     def get_depot_by_id(self, depot_id):
         for depot in MapRepository.resource(self.depots_path):
             if depot['id'] == depot_id:

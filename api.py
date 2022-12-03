@@ -1,7 +1,7 @@
 import json
 
 from multipledispatch import dispatch
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restful import reqparse, abort, Api, Resource
 
 from map_processing_system.elements.route import OptimizeRoute
@@ -55,20 +55,33 @@ class RouteResource(Resource):
         return result
 
 
-class CollectorResource(Resource):
+class TaskAssignmentView(Resource):
 
     # get collector list
     def get(self):
         collectors = user_service.get_short_all_collector()
-        return collectors
+        depots, mcps, factories = map_service.simulate_map_data()
+        return collectors, depots, mcps, factories
+
+
+class Facilities(Resource):
+
+    # get collector list
+    def get(self):
+        facility_id = int(request.args.get('facility_id'))
+        # facility_type = request.args.get('type')
+        # result = map_service.get_facility_info(facility_type, facility_id)
+        # return result
+        return "suceccess"
 
 
 api.add_resource(RouteResource, '/task-assignment/routes')
-api.add_resource(CollectorResource, '/task-assignment/')
-
+api.add_resource(TaskAssignmentView, '/task-assignment/')
+api.add_resource(Facilities, '/task-assignment/facilities')
 
 
 if __name__ == '__main__':
     print("get route: http://127.0.0.1:5000/task-assignment/routes?collector-id={}")
     print("post route: http://127.0.0.1:5000/task-assignment/routes?collector-id={}&route-id={}")
+    print("get mcp: http://127.0.0.1:5000/task-assignment/facilities?facility-id={}")
     app.run(debug=True)
