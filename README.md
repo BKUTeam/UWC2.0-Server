@@ -2,7 +2,7 @@
 ## Init project
 ### Install all packages
 ```
-# This command use to install all needed package
+# This command use to install all needed packages
 pip install -r requirement.txt
 ```
 ### Make use that you have .env file for config
@@ -13,6 +13,7 @@ MAPBOX_API_KEY=<YOUR MAPBOX API KEY>
 API_TYPE=MAPBOX | GOOGLE
 ```
 About the api type, we recommend using mapbox, it's easy to register than google api
+
 You don't need to put all api keys, just the api key of type you are using
 
 ### To run the server
@@ -22,6 +23,7 @@ python api.py
 ```
 ### API
 You can get the sample api request from Postman
+
 [post_man_uwc_api](https://api.postman.com/collections/24750708-4730c223-1645-4881-815a-bfb0b86c8118?access_key=PMAT-01GKC3QTCG7CVXBBKGSCDJZ37V)
 
 ### About the package
