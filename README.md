@@ -12,6 +12,9 @@ GOOGLE_API_KEY=<YOUR GOOGLE API KEY>
 MAPBOX_API_KEY=<YOUR MAPBOX API KEY>
 API_TYPE=MAPBOX | GOOGLE
 ```
+About the api type, we recommend using mapbox, it's easy to register than google api
+You don't need to put all api keys, just the api key of type you are using
+
 ### To run the server
 Go to your command line, make sure you have **python 3.10** (this project are not working with lower version)
 ```
