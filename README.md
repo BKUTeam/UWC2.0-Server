@@ -13,7 +13,7 @@ MAPBOX_API_KEY=<YOUR MAPBOX API KEY>
 API_TYPE=MAPBOX | GOOGLE
 ```
 ### To run the server
-Go to your command line, make sure you have **python**
+Go to your command line, make sure you have **python 3.10** (this project are not working with lower version)
 ```
 python api.py
 ```
