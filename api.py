@@ -120,7 +120,7 @@ class JanitorDetail(Resource):
 class Mcp(Resource):
 
     def get(self):
-        mcps = map_repository.get_all_mcps()
+        mcps = map_service.get_all_mcps()
         return mcps
 
 
@@ -128,16 +128,16 @@ class McpDetail(Resource):
 
     def get(self, mcp_id=None):
         if mcp_id is not None:
-            mcp = map_repository.get_detail_mcp_by_id(mcp_id)
+            mcp = map_service.get_detail_mcp_by_id(mcp_id)
             return mcp
         else:
-            return map_repository.get_all_mcps()
+            return map_service.get_all_mcps()
 
 
 class Depot(Resource):
 
     def get(self):
-        depots = map_repository.get_all_depots()
+        depots = map_service.get_all_depots()
         return depots
 
 
@@ -145,17 +145,18 @@ class DepotDetail(Resource):
 
     def get(self, depot_id=None):
         if depot_id is not None:
-            depot = map_repository.get_detail_depot_by_id(depot_id)
+            depot = map_service.get_detail_depot_by_id(depot_id)
             return depot
         else:
-            return map_repository.get_all_depots()
+            return map_service.get_all_depots()
 
 
 class Factory(Resource):
 
     def get(self):
-        factories = map_repository.get_all_factories()
+        factories = map_service.get_all_factories()
         return factories
+
 
 
 # Task assignment api
