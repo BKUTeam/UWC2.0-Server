@@ -43,8 +43,8 @@ class StoredRoute:
         return None
 
     @staticmethod
-    def get_free_routes_by_depot_id(depot_id):
-        return [route for route in StoredRoute.all_routes
+    def get_free_routes_by_depot_id(depot_id) -> list:
+        return [route.opt_route for route in StoredRoute.all_routes
                 if route.depot_id == depot_id and route.state == StoredRouteState.FREE]
 
     def __init__(self, id, depot_id: int, opt_route: OptimizeRoute, type):
