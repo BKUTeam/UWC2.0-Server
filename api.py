@@ -151,12 +151,38 @@ class DepotDetail(Resource):
             return map_service.get_all_depots()
 
 
+class DepotMCPs(Resource):
+    def get(self, depot_id=None):
+        if depot_id is not None:
+            mcps = map_service.get_mcps_of_depot(depot_id)
+            return mcps
+        else:
+            return map_service.get_all_depots()
+
+
+class DepotCollectors(Resource):
+    def get(self, depot_id=None):
+        if depot_id is not None:
+            collectors = user_service.get_collectors_of_depot(depot_id)
+            return collectors
+        else:
+            return map_service.get_all_depots()
+
+
+class DepotJanitors(Resource):
+    def get(self, depot_id=None):
+        if depot_id is not None:
+            janitors = user_service.get_janitors_of_depot(depot_id)
+            return janitors
+        else:
+            return map_service.get_all_depots()
+
+
 class Factory(Resource):
 
     def get(self):
         factories = map_service.get_all_factories()
         return factories
-
 
 
 # Task assignment api
@@ -174,6 +200,9 @@ api.add_resource(McpDetail, '/api/resources/mcps/<int:mcp_id>')
 
 api.add_resource(Depot, '/api/resources/depots/')
 api.add_resource(DepotDetail, '/api/resources/depots/<int:depot_id>')
+api.add_resource(DepotMCPs, '/api/resources/depots/mcps/<int:depot_id>')
+api.add_resource(DepotCollectors, '/api/resources/depots/collectors/<int:depot_id>')
+api.add_resource(DepotJanitors, '/api/resources/depots/janitors/<int:depot_id>')
 
 api.add_resource(Factory, '/api/resources/factories/')
 

@@ -28,4 +28,10 @@ class UserService:
         janitor = self.user_repository.get_janitor_by_id(janitor_id)
         return janitor
 
+    def get_collectors_of_depot(self, depot_id):
+        return self.user_repository.get_collectors_of_depot(depot_id)
+
+    def get_janitors_of_depot(self, depot_id):
+        return self.user_repository.get_janitors_of_depot(depot_id)
+
 

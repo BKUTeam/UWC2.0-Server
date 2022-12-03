@@ -82,14 +82,42 @@ class MapService:
         factories = self.map_repository.get_all_factories()
         return depots, mcps, factories
 
-    def get_facility_info(self, facility_type, facility_id):
-        #result = []
-        if facility_type== 'depot':
-            result = self.map_repository.get_depot_by_id(facility_id)
-        elif facility_type== 'mcp':
-            result=self.map_repository.get_mcp_by_id(facility_id)
-        elif facility_type== 'factory':
-            result=self.map_repository.get_factory_by_id(facility_id)
-        return result
+    # ###### GET ALL mcp, depot, factory
+    def get_all_mcps(self):
+        return self.map_repository.get_all_mcps()
 
+    def get_all_depots(self):
+        return self.map_repository.get_all_depots()
 
+    def get_all_factories(self):
+        return self.map_repository.get_all_factories()
+
+    # ###### GET BY ID mcp, depot, factory
+    def get_detail_mcp_by_id(self, mcp_id):
+        mcp = self.map_repository.get_mcp_by_id(mcp_id)
+        return mcp
+
+    def get_detail_depot_by_id(self, depot_id):
+        depot = self.map_repository.get_depot_by_id(depot_id)
+        mcps_amount = len(self.map_repository.get_mcps_of_depot(depot_id))
+        full_mcps_amount = self.map_repository.get_amount_full_mcps_of_depot(depot_id)
+        in_route_mcps_amount = self.map_repository.get_amount_in_route_mcps_of_depot(depot_id)
+        collector_amount = len(self.user_repository.get_collectors_of_depot(depot_id))
+        janitor_amount = len(self.user_repository.get_janitors_of_depot(depot_id))
+        vehical_amount = len(self.map_repository.get_vehicles_of_depot(depot_id))
+        depot['mcps_amount'] = mcps_amount
+        depot['full_mcps_amount'] = full_mcps_amount
+        depot['in_route_mcps_amount'] = in_route_mcps_amount
+        depot['worker_amount'] = collector_amount + janitor_amount
+        depot['collector_amount'] = collector_amount
+        depot['janitor_amount'] = janitor_amount
+        depot['vehical_amount'] = vehical_amount
+
+        return depot
+
+    def get_detail_factory_by_id(self, factory_id):
+        factory = self.map_repository.get_factory_by_id(factory_id)
+        return factory
+
+    def get_mcps_of_depot(self, depot_id):
+        return self.map_repository.get_mcps_of_depot(depot_id)
