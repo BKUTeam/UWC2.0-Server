@@ -56,7 +56,7 @@ class MapService:
         depot_id = route.depot_id
         free_routes: list[StoredRoute] = StoredRoute.get_free_routes_by_depot_id(depot_id)
         assigned_routes: list[StoredRoute] = StoredRoute.get_assigned_routes_by_depot_id(depot_id)
-        collectors = self.map_repository.get_collectors_of_depot(depot_id)
+        collectors = self.user_repository.get_collectors_of_depot(depot_id)
 
         if len(collectors) == len(assigned_routes):
             for free_route in free_routes:

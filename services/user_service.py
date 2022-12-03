@@ -1,3 +1,4 @@
+from map_processing_system.elements.route import OptimizeRoute, StoredRoute, StoredRouteState
 from repositories.user_repository import UserRepository
 
 
@@ -18,11 +19,14 @@ class UserService:
     def get_detail_collector_by_id(self, collector_id):
         collector = self.user_repository.get_collector_by_id(collector_id)
         vehicle = self.user_repository.get_vehicle_of_collector(collector_id)
+        route = StoredRoute.get_assigned_routes_by_collector_id(collector_id)
         if vehicle != "":
             collector['gg_location'] = vehicle['gg_location']
             collector['vehicle_cap'] = vehicle['capacity']
-
         return collector
+
+    def get_collector_assigned_route_by_id(self, collector_id):
+        return StoredRoute.get_assigned_routes_by_collector_id(collector_id)
 
     def get_detail_janitor_by_id(self, janitor_id):
         janitor = self.user_repository.get_janitor_by_id(janitor_id)

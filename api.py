@@ -61,26 +61,26 @@ class RouteResource(Resource):
             return "INVALID"
 
 
-class CollectorRoutes(Resource):
-
-    def get(self):
-        collector_id = int(request.args.get('collector-id'))
-        routes = map_service.get_optimize_routes_for_collector(collector_id)
-        collector = user_service.get_detail_collector_by_id(collector_id)
-        result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
-        return result
-
-    # assign route for collector id
-    def post(self):
-        collector_id = int(request.args.get('collector-id'))
-        route_id = int(request.args.get('route-id'))
-        action = str(request.args.get('action'))
-        if action == "ASSIGN":
-            result = map_service.assign_route_for_collector(route_id, collector_id)
-            return result
-
-        # null la true a ._. false la false tai trong service hong co return true -> tui que^n return a ban
-        return ""
+# class CollectorRoutes(Resource):
+#
+#     def get(self):
+#         collector_id = int(request.args.get('collector-id'))
+#         routes = map_service.get_optimize_routes_for_collector(collector_id)
+#         collector = user_service.get_detail_collector_by_id(collector_id)
+#         result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
+#         return result
+#
+#     # assign route for collector id
+#     def post(self):
+#         collector_id = int(request.args.get('collector-id'))
+#         route_id = int(request.args.get('route-id'))
+#         action = str(request.args.get('action'))
+#         if action == "ASSIGN":
+#             result = map_service.assign_route_for_collector(route_id, collector_id)
+#             return result
+#
+#         # null la true a ._. false la false tai trong service hong co return true -> tui que^n return a ban
+#         return ""
 
 
 class Collector(Resource):
@@ -96,6 +96,16 @@ class CollectorDetail(Resource):
         if collector_id is not None:
             collector = user_service.get_detail_collector_by_id(collector_id)
             return collector
+        else:
+            return user_service.get_short_information_of_all_collector()
+
+
+class CollectorRoute(Resource):
+
+    def get(self, collector_id=None):
+        if collector_id is not None:
+            route = user_service.get_collector_assigned_route_by_id(collector_id)
+            return json.loads(json.dumps(route,default=obj_dict))
         else:
             return user_service.get_short_information_of_all_collector()
 
@@ -191,6 +201,7 @@ api.add_resource(RouteResource, '/api/task-assignment/routes')
 # Resource api
 api.add_resource(Collector, '/api/resources/collectors/')
 api.add_resource(CollectorDetail, '/api/resources/collectors/<int:collector_id>')
+api.add_resource(CollectorRoute, '/api/resources/collectors/route/<int:collector_id>')
 
 api.add_resource(Janitor, '/api/resources/janitors/')
 api.add_resource(JanitorDetail, '/api/resources/janitors/<int:janitor_id>')
