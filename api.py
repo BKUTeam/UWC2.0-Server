@@ -1,6 +1,5 @@
 import json
 
-from multipledispatch import dispatch
 from flask import Flask, request
 from flask_restful import reqparse, abort, Api, Resource
 
@@ -125,6 +124,16 @@ class Mcp(Resource):
         return mcps
 
 
+class McpDetail(Resource):
+
+    def get(self, mcp_id=None):
+        if mcp_id is not None:
+            mcp = map_repository.get_detail_mcp_by_id(mcp_id)
+            return mcp
+        else:
+            return map_repository.get_all_mcps()
+
+
 class Depot(Resource):
 
     def get(self):
@@ -155,11 +164,16 @@ api.add_resource(RouteResource, '/api/task-assignment/routes')
 # Resource api
 api.add_resource(Collector, '/api/resources/collectors/')
 api.add_resource(CollectorDetail, '/api/resources/collectors/<int:collector_id>')
+
 api.add_resource(Janitor, '/api/resources/janitors/')
 api.add_resource(JanitorDetail, '/api/resources/janitors/<int:janitor_id>')
+
 api.add_resource(Mcp, '/api/resources/mcps/')
+api.add_resource(McpDetail, '/api/resources/mcps/<int:mcp_id>')
+
 api.add_resource(Depot, '/api/resources/depots/')
 api.add_resource(DepotDetail, '/api/resources/depots/<int:depot_id>')
+
 api.add_resource(Factory, '/api/resources/factories/')
 
 if __name__ == '__main__':
