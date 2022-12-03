@@ -83,7 +83,7 @@ class DirectionsAPI:
             slit_index = int(len(destinations) / 2)
             response_1 = requests.request(
                 method="GET",
-                url=DirectionsAPI.DISTANCE_MATRIX_URL.format(
+                url=DirectionsAPI.GOOGLE_DISTANCE_MATRIX_URL.format(
                     origins='|'.join([str(ele) for ele in origins]),
                     destinations='|'.join([str(ele) for ele in destinations[0:slit_index]]),
                     api_key=DirectionsAPI.get_api_key()),
@@ -95,7 +95,7 @@ class DirectionsAPI:
             ]
             response_2 = requests.request(
                 method="GET",
-                url=DirectionsAPI.DISTANCE_MATRIX_URL.format(
+                url=DirectionsAPI.GOOGLE_DISTANCE_MATRIX_URL.format(
                     origins='|'.join([str(ele) for ele in origins]),
                     destinations='|'.join([str(ele) for ele in destinations[slit_index:]]),
                     api_key=DirectionsAPI.get_api_key()),
