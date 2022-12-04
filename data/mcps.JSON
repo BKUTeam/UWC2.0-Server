@@ -125,7 +125,7 @@
     "area": 4,
     "gg_location": "10.885073890378134,106.61729051257286",
     "capacity": 1700,
-    "filled": 67
+    "filled": 67,
     "state": "HALF",
     "depot_id": 2
   },
@@ -135,7 +135,7 @@
     "area": 4,
     "gg_location": "10.901420712262409,106.62498279930146",
     "capacity": 1750,
-    "filled": 55
+    "filled": 55,
     "state": "HALF",
     "depot_id": 2
   },
@@ -386,7 +386,7 @@
     "gg_location": "10.810339725985505,106.66166809233586",
     "capacity": 1700,
     "filled": 77,
-    "state": "HALF,
+    "state": "HALF",
     "depot_id": 4
   },
   {

@@ -13,8 +13,8 @@ from services.map_service import MapService
 from services.user_service import UserService
 
 app = Flask(__name__)
-api = Api(app)
 CORS(app, resources={r"*": {"origins": "*"}})
+api = Api(app)
 
 parser = reqparse.RequestParser()
 parser.add_argument('collector_id')
