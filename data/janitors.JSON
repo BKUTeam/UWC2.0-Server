@@ -8,7 +8,8 @@
     "phone_number": "0983477274",
     "address": "man utd",
     "birthplace": "Portugal",
-    "mcp_id": 1
+    "mcp_id": 1,
+    "depot_id": 1
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "phone_number": "09142817442",
     "address": "psg",
     "birthplace": "Argentina",
-    "mcp_id": 2
+    "mcp_id": 2,
+    "depot_id": 1
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "phone_number": "08294827442",
     "address": "psg",
     "birthplace": "Brazil",
-    "mcp_id": 3
+    "mcp_id": 3,
+    "depot_id": 2
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "phone_number": "08297426722",
     "address": "ac milan",
     "birthplace": "Sweden",
-    "mcp_id": 4
+    "mcp_id": 4,
+    "depot_id": 2
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "phone_number": "09621746726",
     "address": "psg",
     "birthplace": "France",
-    "mcp_id": 5
+    "mcp_id": 5,
+    "depot_id": 4
   },
   {
     "id": 6,
@@ -63,7 +68,8 @@
     "phone_number": "086427627633",
     "address": "juventus",
     "birthplace": "France",
-    "mcp_id": 6
+    "mcp_id": 6,
+    "depot_id": 5
   },
   {
     "id": 7,
@@ -74,7 +80,8 @@
     "phone_number": "09723636363",
     "address": "man utd",
     "birthplace": "Spain",
-    "mcp_id": 7
+    "mcp_id": 7,
+    "depot_id": 4
   },
   {
     "id": 8,
@@ -85,7 +92,8 @@
     "phone_number": "09217617642",
     "address": "liverpool",
     "birthplace": "Egypt",
-    "mcp_id": 8
+    "mcp_id": 8,
+    "depot_id": 8
   },
   {
     "id": 9,
@@ -96,7 +104,8 @@
     "phone_number": "09746274622",
     "address": "Tottenham",
     "birthplace": "Wales",
-    "mcp_id": 9
+    "mcp_id": 9,
+    "depot_id": 10
   },
   {
     "id": 10,
@@ -107,7 +116,8 @@
     "phone_number": "08826427627",
     "address": "psg",
     "birthplace": "Spain",
-    "mcp_id": 10
+    "mcp_id": 10,
+    "depot_id": 5
   },
   {
     "id": 11,
@@ -118,7 +128,8 @@
     "phone_number": "0983477274",
     "address": "man utd",
     "birthplace": "England",
-    "mcp_id": 11
+    "mcp_id": 11,
+    "depot_id": 6
   },
   {
     "id": 12,
@@ -129,7 +140,8 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "Brazil",
-    "mcp_id": 12
+    "mcp_id": 12,
+    "depot_id": 9
   },
   {
     "id": 13,
@@ -140,7 +152,8 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "France",
-    "mcp_id": 13
+    "mcp_id": 13,
+    "depot_id": 7
   },
   {
     "id": 14,
@@ -151,7 +164,8 @@
     "phone_number": "0848274264",
     "address": "man utd",
     "birthplace": "Brazil",
-    "mcp_id": 14
+    "mcp_id": 14,
+    "depot_id": 7
   },
   {
     "id": 15,
@@ -162,7 +176,8 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "German",
-    "mcp_id": 15
+    "mcp_id": 15,
+    "depot_id": 10
   },
   {
     "id": 16,
@@ -173,7 +188,8 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "France",
-    "mcp_id": 16
+    "mcp_id": 16,
+    "depot_id": 3
   },
   {
     "id": 17,
@@ -183,7 +199,9 @@
     "citizen_identification": "412421424242",
     "phone_number": "0983477274",
     "address": "Asenal",
-    "birthplace": "German"
+    "birthplace": "German",
+    "mcp_id": 17,
+    "depot_id": 9
   },
 
   {
@@ -195,7 +213,8 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "Brazil",
-    "mcp_id": 19
+    "mcp_id": 19,
+    "depot_id": 6
   },
   {
     "id": 20,
@@ -206,6 +225,7 @@
     "phone_number": "0983477274",
     "address": "man utd",
     "birthplace": "France",
-    "mcp_id": 20
+    "mcp_id": 20,
+    "depot_id": 5
   }
 ]
