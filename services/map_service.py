@@ -76,3 +76,20 @@ class MapService:
         free_route.release()
         self.map_processing.release_redundant_route(free_route.opt_route)
 
+    def simulate_map_data(self):
+        depots = self.map_repository.get_all_depots()
+        mcps = self.map_repository.get_all_mcps()
+        factories = self.map_repository.get_all_factories()
+        return depots, mcps, factories
+
+    def get_facility_info(self, facility_type, facility_id):
+        #result = []
+        if facility_type== 'depot':
+            result = self.map_repository.get_depot_by_id(facility_id)
+        elif facility_type== 'mcp':
+            result=self.map_repository.get_mcp_by_id(facility_id)
+        elif facility_type== 'factory':
+            result=self.map_repository.get_factory_by_id(facility_id)
+        return result
+
+
