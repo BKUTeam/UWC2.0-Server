@@ -2,6 +2,7 @@ import json
 
 from flask import Flask, request
 from flask_restful import reqparse, abort, Api, Resource
+from flask_cors import CORS
 
 from map_processing_system.elements.route import OptimizeRoute
 from map_processing_system.directions_api import DirectionsAPI
@@ -13,6 +14,7 @@ from services.user_service import UserService
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app, resources={r"*": {"origins": "*"}})
 
 parser = reqparse.RequestParser()
 parser.add_argument('collector_id')

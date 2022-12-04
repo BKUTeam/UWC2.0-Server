@@ -3,3 +3,4 @@ ortools=9.4.1874
 python-dotenv=0.21.0
 Flask=2.2.2
 Flask-RESTful=0.3.9
+Flask-Cors=3.0.10
