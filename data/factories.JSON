@@ -1,39 +1,39 @@
 [
   {
     "id": 1,
-    "name": "factory 1"
-    "date_created": "30/3/2003"
-    "area": 2000
+    "name": "factory 1",
+    "date_created": "30/3/2003",
+    "area": 2000,
     "gg_location": "10.772068937614467,106.65789644698636"
   }
   {
-    "id": "2"
-    "name": "factory 2"
-    "date_created": "24/5/2006"
-    "area": 3000
+    "id": "2",
+    "name": "factory 2",
+    "date_created": "24/5/2006",
+    "area": 3000,
     "gg_location": "10.831609712517988, 106.67425172331482"
   }
   {
-    "id": 3
-    "name": "factory 3"
-    "date_created": "24/5/2006"
-    "area": 3000
+    "id": 3,
+    "name": "factory 3",
+    "date_created": "24/5/2006",
+    "area": 3000,
     "gg_location":"10.772068937614467, 106.65789644698636"
   },
 
   {
-    "id": 4
-    "name": "factory 4"
-    "date_created": "24/5/2006"
-    "area": 3000
+    "id": 4,
+    "name": "factory 4",
+    "date_created": "24/5/2006",
+    "area": 3000,
     "gg_location": "10.831609712517988, 106.67425172331482"
   },
 
   {
-    "id": 5
-    "name": "factory 5"
-    "date_created": "24/5/2006"
-    "area": 3000
+    "id": 5,
+    "name": "factory 5",
+    "date_created": "24/5/2006",
+    "area": 3000,
     "gg_location": "10.728748645095568, 106.67212448040112"
   }
 ]
