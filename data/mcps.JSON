@@ -505,7 +505,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.758880,106.652804",
-    "capacity": 1756,
+    "capacity": 1750,
     "filled": 37,
     "state": "FREE"
   },
@@ -515,7 +515,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.761070,106.668240",
-    "capacity": 1860,
+    "capacity": 1800,
     "filled": 49,
     "state": "HALF"
   },
@@ -525,7 +525,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.750259,106.658731",
-    "capacity": 1868,
+    "capacity": 1800,
     "filled": 60,
     "state": "HALF"
   },
@@ -535,7 +535,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.771821,106.673428",
-    "capacity": 1792,
+    "capacity": 1750,
     "filled": 50,
     "state": "HALF"
   },
@@ -545,7 +545,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.782036,106.673065",
-    "capacity": 1808,
+    "capacity": 1800,
     "filled": 96,
     "state": "FULL"
   },
@@ -555,7 +555,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.758908,106.675878",
-    "capacity": 1784,
+    "capacity": 1750,
     "filled": 10,
     "state": "FREE"   
   },
@@ -565,7 +565,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.773427,106.688884",
-    "capacity": 1892,
+    "capacity": 1800,
     "filled": 1,
     "state": "FREE"
   },
@@ -575,7 +575,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.760488,106.689116",
-    "capacity": 1844,
+    "capacity": 1800,
     "filled": 98,
     "state": "IN_ROUTE"
   },
@@ -585,7 +585,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.762693,106.700785",
-    "capacity": 1721,
+    "capacity": 1700,
     "filled": 100,
     "state": "IN_ROUTE"
   },
@@ -595,7 +595,7 @@
     "area": 4,
     "depot_id": 6,
     "gg_location": "10.771834,106.701538",
-    "capacity": 1872,
+    "capacity": 1800,
     "filled": 77,
     "state": "HALF"
   },
@@ -605,7 +605,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.782385,106.700416",
-    "capacity": 1721,
+    "capacity": 1750,
     "filled": 4,
     "state": "FREE"
   },
@@ -625,7 +625,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.787303,106.712077",
-    "capacity": 1810,
+    "capacity": 1800,
     "filled": 97,
     "state": "FULL"
   },
@@ -635,7 +635,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.788718,106.714876",
-    "capacity": 1840,
+    "capacity": 1800,
     "filled": 99,
     "state": "IN_ROUTE"
   },
@@ -645,7 +645,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.797616,106.725421",
-    "capacity": 1854,
+    "capacity": 1700,
     "filled": 19,
     "state": "FREE"
   },
@@ -655,7 +655,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.802891,106.713531",
-    "capacity": 1803,
+    "capacity": 1800,
     "filled": 88,
     "state": "HALF"
   },
@@ -665,7 +665,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.807758,106.720785",
-    "capacity": 1836,
+    "capacity": 1800,
     "filled": 73,
     "state": "HALF"
   },
@@ -675,7 +675,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.817153,106.718222",
-    "capacity": 1862,
+    "capacity": 1750,
     "filled": 99,
     "state": "IN_ROUTE"
   },
@@ -685,7 +685,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.824742,106.733431",
-    "capacity": 1829,
+    "capacity": 1750,
     "filled": 87,
     "state": "HALF"
   },
@@ -695,7 +695,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.815578,106.745001",
-    "capacity": 1864,
+    "capacity": 1800,
     "filled": 97,
     "state": "FULL"
   },
@@ -705,7 +705,7 @@
     "area": 4,
     "depot_id": 7,
     "gg_location": "10.829137,106.748912",
-    "capacity": 1753,
+    "capacity": 1750,
     "filled": 74,
     "state": "HALF"
   },
@@ -715,7 +715,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.762617,106.640302",
-    "capacity": 1793,
+    "capacity": 1700,
     "filled": 29,
     "state": "FREE"
   },
@@ -735,7 +735,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.737178,106.638288",
-    "capacity": 1753,
+    "capacity": 1750,
     "filled": 13,
     "state": "FREE"
   },
@@ -745,7 +745,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.737418,106.627222",
-    "capacity": 1780,
+    "capacity": 1700,
     "filled": 97,
     "state": "FULL"
   },
@@ -755,7 +755,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.752534,106.628605",
-    "capacity": 1857,
+    "capacity": 1800,
     "filled": 99,
     "state": "FULL"
   },
@@ -765,7 +765,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.763815,106.627241",
-    "capacity": 1841,
+    "capacity": 1800,
     "filled": 92,
     "state": "IN_ROUTE"
   },
@@ -775,7 +775,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.769826,106.613113",
-    "capacity": 1712,
+    "capacity": 1700,
     "filled": 90,
     "state": "IN_ROUTE"
   },
@@ -785,7 +785,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.759871,106.617461",
-    "capacity": 1880,
+    "capacity": 1800,
     "filled": 6,
     "state": "FREE"
   },
@@ -795,7 +795,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.749716,106.611822",
-    "capacity": 1810,
+    "capacity": 1800,
     "filled": 93,
     "state": "FULL"
   },
@@ -805,7 +805,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.733739,106.612407",
-    "capacity": 1788,
+    "capacity": 1700,
     "filled": 88,
     "state": "HALF"
   },
@@ -815,7 +815,7 @@
     "area": 4,
     "depot_id": 8,
     "gg_location": "10.721037,106.607627",
-    "capacity": 1872,
+    "capacity": 1750,
     "filled": 59,
     "state": "HALF"
   },
@@ -825,7 +825,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.758243,106.715273",
-    "capacity": 1768,
+    "capacity": 1700,
     "filled": 48,
     "state": "HALF"
   },
@@ -835,7 +835,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.753157,106.703896",
-    "capacity": 1892,
+    "capacity": 1750,
     "filled": 87,
     "state": "HALF"
   },
@@ -845,7 +845,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.745720,106.700488",
-    "capacity": 1766,
+    "capacity": 1700,
     "filled": 96,
     "state": "IN_ROUTE"
   },
@@ -855,7 +855,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.750481,106.712090",
-    "capacity": 1816,
+    "capacity": 1800,
     "filled": 19,
     "state": "FREE"
   },
@@ -865,7 +865,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.729462,106.702081",
-    "capacity": 1731,
+    "capacity": 1700,
     "filled": 74,
     "state": "HALF"
   },
@@ -875,7 +875,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.733618,106.695951",
-    "capacity": 1771,
+    "capacity": 1750,
     "filled": 93,
     "state": "IN_ROUTE"
   },
@@ -885,7 +885,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.751371,106.691007",
-    "capacity": 1740,
+    "capacity": 1750,
     "filled": 88,
     "state": "HALF"
   },
@@ -895,7 +895,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.736444,106.710397",
-    "capacity": 1706,
+    "capacity": 1700,
     "filled": 90,
     "state": "FULL"
   },
@@ -905,7 +905,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.752975,106.687972",
-    "capacity": 1892,
+    "capacity": 1800,
     "filled": 5,
     "state": "FREE"
   },
@@ -915,7 +915,7 @@
     "area": 4,
     "depot_id": 9,
     "gg_location": "10.738051,106.726213",
-    "capacity": 1870,
+    "capacity": 1700,
     "filled": 88,
     "state": "HALF"
   },
@@ -925,7 +925,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.779125,106.713191",
-    "capacity": 1869,
+    "capacity": 1800,
     "filled": 22,
     "state": "FREE"
   },
@@ -935,7 +935,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.768695,106.712328",
-    "capacity": 1787,
+    "capacity": 1750,
     "filled": 87,
     "state": "HALF"
   },
@@ -945,7 +945,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.765093,106.727311",
-    "capacity": 1722,
+    "capacity": 1700,
     "filled": 93,
     "state": "FULL"
   },
@@ -955,7 +955,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.777464,106.727495",
-    "capacity": 1831,
+    "capacity": 1800,
     "filled": 30,
     "state": "FREE"
   },
@@ -965,7 +965,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.795370,106.730410",
-    "capacity": 1857,
+    "capacity": 1750,
     "filled": 94,
     "state": "IN_ROUTE"
   },
@@ -975,7 +975,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.800635,106.744206",
-    "capacity": 1870,
+    "capacity": 1750,
     "filled": 25,
     "state": "FREE"
   },
@@ -985,7 +985,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.787048,106.741562",
-    "capacity": 1829,
+    "capacity": 1800,
     "filled": 67,
     "state": "HALF"
   },
@@ -995,7 +995,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.787686,106.753289",
-    "capacity": 1770,
+    "capacity": 1700,
     "filled": 95,
     "state": "FULL"
   },
@@ -1005,7 +1005,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.776457,106.755071",
-    "capacity": 1732,
+    "capacity": 1750,
     "filled": 52,
     "state": "HALF"
   },
@@ -1015,7 +1015,7 @@
     "area": 4,
     "depot_id": 10,
     "gg_location": "10.778020,106.745428",
-    "capacity": 1708,
+    "capacity": 1700,
     "filled": 73,
     "state": "HALF"
   }
