@@ -67,3 +67,10 @@ class MapRepository:
 
     def get_amount_in_route_mcps_of_depot(self, depot_id):
         return len([mcp for mcp in MapRepository.resource(self.mcps_path) if mcp['depot_id'] == depot_id and mcp['state'] == "IN_ROUTE"])
+
+    def update_mcp_in_route(self, mcps_id):
+        mcps = MapRepository.resource(self.mcps_path)
+        for mcp_id in mcps_id:
+            mcps[mcp_id]['state'] = "IN_ROUTE"
+        with open(self.mcps_path, 'w+') as f:
+            json.dump(mcps, f, indent=2)

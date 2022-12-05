@@ -44,7 +44,7 @@ class RouteResource(Resource):
             routes = map_service.get_optimize_routes_for_collector(collector_id)
             collector = user_service.get_detail_collector_by_id(collector_id)
             print(routes)
-            result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
+            result = json.dumps({"routes": routes}, default=obj_dict)
             return json.loads(result)
         except Exception as e:
             print(e)

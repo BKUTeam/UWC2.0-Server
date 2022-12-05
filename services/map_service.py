@@ -53,6 +53,7 @@ class MapService:
             print(e)
             return False
 
+        self.map_processing.update_mcp_state_in_route(route.opt_route)
         depot_id = route.depot_id
         free_routes: list[StoredRoute] = StoredRoute.get_free_routes_by_depot_id(depot_id)
         assigned_routes: list[StoredRoute] = StoredRoute.get_assigned_routes_by_depot_id(depot_id)

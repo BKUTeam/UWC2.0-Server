@@ -259,3 +259,14 @@ class MapProcessing:
         self.mcp_pool = [mcp_id for mcp_id in self.mcp_pool if mcp_id in picked_mcps]
 
         return optimize_routes
+
+    def update_mcp_state_in_route(self, route):
+        picked_mcps = []
+        for node in route.list_node:
+            if node.type == 'MCP':
+                picked_mcps.append(node.object_id)
+        self.map_repo.update_mcp_in_route(picked_mcps)
+
+        return "success"
+
+
