@@ -15,8 +15,8 @@
     "area": 5,
     "gg_location": "10.782111529765048,106.634818140168",
     "capacity": 1700,
-    "filled": 40,
-    "state": "HALF",
+    "filled": 100,
+    "state": "FREE",
     "depot_id": 1
   },
   {

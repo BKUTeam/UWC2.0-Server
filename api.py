@@ -46,7 +46,7 @@ class RouteResource(Resource):
             routes = map_service.get_optimize_routes_for_collector(collector_id)
             collector = user_service.get_detail_collector_by_id(collector_id)
             print(routes)
-            result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
+            result = json.dumps({"routes": routes}, default=obj_dict)
             return json.loads(result)
         except Exception as e:
             print(e)
@@ -63,26 +63,26 @@ class RouteResource(Resource):
             return "INVALID"
 
 
-class CollectorRoutes(Resource):
-
-    def get(self):
-        collector_id = int(request.args.get('collector-id'))
-        routes = map_service.get_optimize_routes_for_collector(collector_id)
-        collector = user_service.get_detail_collector_by_id(collector_id)
-        result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
-        return result
-
-    # assign route for collector id
-    def post(self):
-        collector_id = int(request.args.get('collector-id'))
-        route_id = int(request.args.get('route-id'))
-        action = str(request.args.get('action'))
-        if action == "ASSIGN":
-            result = map_service.assign_route_for_collector(route_id, collector_id)
-            return result
-
-        # null la true a ._. false la false tai trong service hong co return true -> tui que^n return a ban
-        return ""
+# class CollectorRoutes(Resource):
+#
+#     def get(self):
+#         collector_id = int(request.args.get('collector-id'))
+#         routes = map_service.get_optimize_routes_for_collector(collector_id)
+#         collector = user_service.get_detail_collector_by_id(collector_id)
+#         result = json.dumps({"collector": collector, "route": routes}, default=obj_dict)
+#         return result
+#
+#     # assign route for collector id
+#     def post(self):
+#         collector_id = int(request.args.get('collector-id'))
+#         route_id = int(request.args.get('route-id'))
+#         action = str(request.args.get('action'))
+#         if action == "ASSIGN":
+#             result = map_service.assign_route_for_collector(route_id, collector_id)
+#             return result
+#
+#         # null la true a ._. false la false tai trong service hong co return true -> tui que^n return a ban
+#         return ""
 
 
 class Collector(Resource):
@@ -98,6 +98,16 @@ class CollectorDetail(Resource):
         if collector_id is not None:
             collector = user_service.get_detail_collector_by_id(collector_id)
             return collector
+        else:
+            return user_service.get_short_information_of_all_collector()
+
+
+class CollectorRoute(Resource):
+
+    def get(self, collector_id=None):
+        if collector_id is not None:
+            route = user_service.get_collector_assigned_route_by_id(collector_id)
+            return json.loads(json.dumps(route,default=obj_dict))
         else:
             return user_service.get_short_information_of_all_collector()
 
@@ -122,7 +132,7 @@ class JanitorDetail(Resource):
 class Mcp(Resource):
 
     def get(self):
-        mcps = map_repository.get_all_mcps()
+        mcps = map_service.get_all_mcps()
         return mcps
 
 
@@ -130,16 +140,16 @@ class McpDetail(Resource):
 
     def get(self, mcp_id=None):
         if mcp_id is not None:
-            mcp = map_repository.get_detail_mcp_by_id(mcp_id)
+            mcp = map_service.get_detail_mcp_by_id(mcp_id)
             return mcp
         else:
-            return map_repository.get_all_mcps()
+            return map_service.get_all_mcps()
 
 
 class Depot(Resource):
 
     def get(self):
-        depots = map_repository.get_all_depots()
+        depots = map_service.get_all_depots()
         return depots
 
 
@@ -147,16 +157,43 @@ class DepotDetail(Resource):
 
     def get(self, depot_id=None):
         if depot_id is not None:
-            depot = map_repository.get_detail_depot_by_id(depot_id)
+            depot = map_service.get_detail_depot_by_id(depot_id)
             return depot
         else:
-            return map_repository.get_all_depots()
+            return map_service.get_all_depots()
+
+
+class DepotMCPs(Resource):
+    def get(self, depot_id=None):
+        if depot_id is not None:
+            mcps = map_service.get_mcps_of_depot(depot_id)
+            return mcps
+        else:
+            return map_service.get_all_depots()
+
+
+class DepotCollectors(Resource):
+    def get(self, depot_id=None):
+        if depot_id is not None:
+            collectors = user_service.get_collectors_of_depot(depot_id)
+            return collectors
+        else:
+            return map_service.get_all_depots()
+
+
+class DepotJanitors(Resource):
+    def get(self, depot_id=None):
+        if depot_id is not None:
+            janitors = user_service.get_janitors_of_depot(depot_id)
+            return janitors
+        else:
+            return map_service.get_all_depots()
 
 
 class Factory(Resource):
 
     def get(self):
-        factories = map_repository.get_all_factories()
+        factories = map_service.get_all_factories()
         return factories
 
 
@@ -166,6 +203,7 @@ api.add_resource(RouteResource, '/api/task-assignment/routes')
 # Resource api
 api.add_resource(Collector, '/api/resources/collectors/')
 api.add_resource(CollectorDetail, '/api/resources/collectors/<int:collector_id>')
+api.add_resource(CollectorRoute, '/api/resources/collectors/route/<int:collector_id>')
 
 api.add_resource(Janitor, '/api/resources/janitors/')
 api.add_resource(JanitorDetail, '/api/resources/janitors/<int:janitor_id>')
@@ -175,6 +213,9 @@ api.add_resource(McpDetail, '/api/resources/mcps/<int:mcp_id>')
 
 api.add_resource(Depot, '/api/resources/depots/')
 api.add_resource(DepotDetail, '/api/resources/depots/<int:depot_id>')
+api.add_resource(DepotMCPs, '/api/resources/depots/mcps/<int:depot_id>')
+api.add_resource(DepotCollectors, '/api/resources/depots/collectors/<int:depot_id>')
+api.add_resource(DepotJanitors, '/api/resources/depots/janitors/<int:depot_id>')
 
 api.add_resource(Factory, '/api/resources/factories/')
 
