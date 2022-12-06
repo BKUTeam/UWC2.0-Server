@@ -1,5 +1,6 @@
 from enum import Enum
 
+from locals import Locals
 from map_processing_system.elements.route_node import OptimizeRouteNode
 
 
@@ -9,6 +10,66 @@ class OptimizeRoute:
         self.render_route = ""
         self.id = -1
 
+    def get_route_info(self):
+        total_loaded_phase_1 = 0
+        total_loaded_phase_2 = 0
+        distance_phase_1 = 0
+        distance_phase_2 = 0
+
+        phase = 1
+        for node in self.list_node:
+            if node.type == 'FACTORY':
+                phase = 2
+
+            if node.type == 'MCP':
+                if phase == 1:
+                    total_loaded_phase_1 += node.loaded
+                    distance_phase_1 += node.reached_distance
+                elif phase == 2:
+                    total_loaded_phase_2 += node.loaded
+                    distance_phase_2 += node.reached_distance
+
+        return {
+            'total_loaded_phase_1': total_loaded_phase_1,
+            'total_loaded_phase_2': total_loaded_phase_2,
+            'distance_phase_1': distance_phase_1,
+            'distance_phase_2': distance_phase_2
+        }
+
+    def is_valid_route_with_vehicle(self, condition: dict) -> bool:
+        """
+        This method check a route is valid or not by some condition
+        You must add 'vehicle_capacity' field in condition param
+        Condition:
+         - Check vehicle capacity
+         - Check total loaded in each phase is enough or not
+        """
+
+        percent_load_in_phase_1 = condition.get('percent_load_in_phase_1')
+        percent_load_in_phase_2 = condition.get('percent_load_in_phase_2')
+        vehicle_capacity = condition.get('vehicle_capacity')
+
+        if vehicle_capacity is None:
+            raise Exception("[is_valid_route] - Not found vehicle capacity in condition")
+
+        route_info = self.get_route_info()
+
+        if percent_load_in_phase_1 is None:
+            percent_load_in_phase_1 = Locals.load_config().get('default_loaded_percent')
+
+        if percent_load_in_phase_2 is None:
+            percent_load_in_phase_2 = Locals.load_config().get('default_loaded_percent')
+
+        if route_info['total_loaded_phase_1'] > vehicle_capacity or \
+                route_info['total_loaded_phase_2'] > vehicle_capacity:
+            return False
+
+        if (route_info['total_loaded_phase_1'] >= vehicle_capacity * percent_load_in_phase_1 / 100) and \
+                (route_info['total_loaded_phase_2'] >= vehicle_capacity * percent_load_in_phase_2 / 100):
+            return True
+
+        return False
+
 
 class StoredRouteState(Enum):
     ASSIGNED = 'ASSIGNED'
@@ -17,7 +78,6 @@ class StoredRouteState(Enum):
 
 
 class StoredRoute:
-
     ID = -1
     all_routes = []
 
@@ -75,4 +135,3 @@ class StoredRoute:
     def get_assigned_routes_by_collector_id(collector_id):
         return [route.opt_route for route in StoredRoute.all_routes
                 if route.depot_id == collector_id and route.state == StoredRouteState.ASSIGNED]
-

@@ -15,3 +15,8 @@ def export_matrix_str_to_json(_matrix, _filename):
 def print_matrix(_matrix):
     for i in _matrix:
         print('\t'.join(map(str, i)))
+
+
+def print_dict(_dict):
+    for k, v in _dict.items():
+        print(f'{k}: {v}')

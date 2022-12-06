@@ -42,7 +42,7 @@ class DirectionsAPI:
     @staticmethod
     def get_api_type():
         return Locals.load_config()['api_type']
-    
+
     @staticmethod
     def get_distance_google_api(origin, destination):
         data = {}

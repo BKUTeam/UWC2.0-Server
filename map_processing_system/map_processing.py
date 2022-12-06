@@ -51,7 +51,8 @@ class MapProcessing:
                  (int(node['capacity']) if 'capacity' in node else 0))
                 for node in list_node]
 
-    def merge_routes(self, routes_p1, routes_p2, list_location, list_id) -> list[list[OptimizeRouteNode]] | None:
+    def merge_routes(self, routes_p1, routes_p2, list_node_p1, list_node_p2) \
+            -> list[list[OptimizeRouteNode]] | None:
 
         if len(routes_p1) != len(routes_p2):
             return None
@@ -63,26 +64,31 @@ class MapProcessing:
 
             # create optimize route node from simple at phrase 1
             route = routes_p1[i]
+            list_location_1 = self.get_list_gg_location(list_node_p1)
+            list_id_1 = self.get_list_id(list_node_p1)
             for index, node in enumerate(route):
                 merged_route.append(
                     OptimizeRouteNode(
-                        id=list_id[node.index],
-                        location=list_location[node.index],
+                        id=list_id_1[node.index],
+                        location=list_location_1[node.index],
                         reached_distance=node.distance,
                         loaded=node.loaded,
-                        type='DEPOT' if index == 0 else ('FACTORY' if index == len(route) - 1 else 'MCP')
+                        type='DEPOT' if index == 0 else
+                        ('MCP' if index in range(1, len(self.working_mcps) + 1) else 'FACTORY')
                     )
                 )
 
             # create optimize route node from simple at phrase 1
             route = routes_p2[i]
+            list_location_2 = self.get_list_gg_location(list_node_p2)
+            list_id_2 = self.get_list_id(list_node_p2)
             for index, node in enumerate(route):
                 if index == 0:
                     continue
                 merged_route.append(
                     OptimizeRouteNode(
-                        id=list_id[node.index],
-                        location=list_location[node.index],
+                        id=list_id_2[node.index],
+                        location=list_location_2[node.index],
                         reached_distance=node.distance,
                         loaded=node.loaded,
                         type='FACTORY' if index == len(route) - 1 else 'MCP'
@@ -90,7 +96,7 @@ class MapProcessing:
                 )
 
             # comeback to depot by the first id
-            depot_id = list_id[0]
+            depot_id = list_id_1[0]
             depot = self.map_repo.get_depot_by_id(depot_id)
             merged_route.append(
                 OptimizeRouteNode(
@@ -198,12 +204,12 @@ class MapProcessing:
 
     def get_optimize_routes(self, depot, vehicles):
         factories = self.map_repo.get_all_factories()
-        list_node = [depot] + [mcp for mcp in self.working_mcps] + [factory for factory in factories]
+        list_node_1 = [depot] + [mcp for mcp in self.working_mcps] + [factory for factory in factories]
 
         # set up data to use or tools
-        list_location = self.get_list_gg_location(list_node)
-        list_id = self.get_list_id(list_node)
-        demand_all_nodes = self.get_list_capacity(list_node)
+        list_location = self.get_list_gg_location(list_node_1)
+        list_id = self.get_list_id(list_node_1)
+        demand_all_nodes = self.get_list_capacity(list_node_1)
         vehicle_capacities = self.get_list_capacity(vehicles)
 
         result_phrase_1 = self.get_optimize_routes_from_depot_to_factories(
@@ -213,18 +219,30 @@ class MapProcessing:
         )
 
         # handle result in phrase 1 to find route phrase 2
-        factory_indexes_of_factories, loaded_mcp_indexes_in_demands \
+        index_of_end_factories, loaded_mcp_indexes_in_demands \
             = self.handle_result_of_first_phrase(result_phrase_1, demand_all_nodes)
+
+        # If number of factories > number of vehicles
+        # We need to trim the list_node,
+        # Because, the redundant factories is not used in phase 2
+        # Bug: factory -> MCP in phase 2
+        factory_in_phase_2 = [node for index, node in enumerate(list_node_1) if index in index_of_end_factories]
+
+        # List node for phase 2
+        list_node_2 = [depot] + [mcp for mcp in self.working_mcps] + factory_in_phase_2
+        list_location = self.get_list_gg_location(list_node_2)
+        list_id = self.get_list_id(list_node_2)
+        demand_all_nodes = self.get_list_capacity(list_node_2)
 
         result_phrase_2 = self.get_optimize_routes_from_factories_to_depot(
             DirectionsAPI.get_distance_matrix(list_location, list_id),
-            demand_all_nodes[:],
-            vehicle_capacities[:],
-            factory_indexes_of_factories[:],
-            loaded_mcp_indexes_in_demands[:]
+            demands=demand_all_nodes[:],
+            vehicles=vehicle_capacities[:],
+            factory_indexes_of_factories=list(range(len(list_node_2) - len(factory_in_phase_2), len(list_node_2))),
+            loaded_mcp_indexes_in_demands=loaded_mcp_indexes_in_demands[:]
         )
 
-        list_merged_route = self.merge_routes(result_phrase_1, result_phrase_2, list_location, list_id)
+        list_merged_route = self.merge_routes(result_phrase_1, result_phrase_2, list_node_1, list_node_2)
         if list_merged_route is None:
             print("Merge routes failure!")
 
