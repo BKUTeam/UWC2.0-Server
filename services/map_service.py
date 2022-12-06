@@ -83,7 +83,6 @@ class MapService:
         return self.map_repository.get_all_mcps()
 
     def get_all_depots(self):
-        self.map_repository.update_mcp_in_routes()
         return self.map_repository.get_all_depots()
 
     def get_all_factories(self):
