@@ -106,7 +106,7 @@ class DirectionsAPI:
     @staticmethod
     def get_distance_matrix(list_location, list_id: list[str]) -> list[list[int]]:
 
-        file_path = './distance_matrix/' + (''.join([str(id) for id in list_id])) + '.JSON'
+        file_path = './distance_matrix/' + ('-'.join([str(id) for id in list_id])) + '.JSON'
         root_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(root_dir, file_path)
         if os.path.exists(file_path):
