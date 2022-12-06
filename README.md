@@ -24,7 +24,7 @@ python api.py
 ### API
 You can get the sample api request from Postman
 
-[post_man_uwc_api](https://api.postman.com/collections/24750708-4730c223-1645-4881-815a-bfb0b86c8118?access_key=PMAT-01GKC3QTCG7CVXBBKGSCDJZ37V)
+[post_man_uwc_api](https://api.postman.com/collections/24740156-59df8313-e8ab-4d07-ba92-48be93dcce3c?access_key=PMAT-01GKCMC8BRAGDACBVMWPNCZAF7)
 
 ### About the package
 We use map direction api to solve UWC problem, make sure you have network connection
