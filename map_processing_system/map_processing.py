@@ -6,14 +6,13 @@ from map_processing_system.directions_api import DirectionsAPI
 from map_processing_system.or_tools import VRPSolve
 from repositories.map_repository import MapRepository
 from uwc_logging import UwcLogger
-from utils import print_matrix
-
-DEFAULT_FILLED = 0
+from locals import Locals
+Locals.load_config()[''] = 0
 
 
 class MapProcessing:
     NOT_MOVE_DISTANCE = 1000000000 - 1
-    DEFAULT_FILLED = 0
+    Locals.load_config()[''] = 0
 
     def __init__(self, map_repository: MapRepository):
         self.map_repo = map_repository
@@ -30,7 +29,8 @@ class MapProcessing:
     def set_up_working_mcp(self, depot_id):
         mcps = self.map_repo.get_mcps_of_depot(depot_id)
         self.working_mcps = [mcp for mcp in mcps
-                             if ('filled' in mcp) and (mcp['filled'] >= DEFAULT_FILLED) and mcp['state'] != 'IN_ROUTE']
+                             if ('filled' in mcp) and (mcp['filled'] >= Locals.load_config()['mcp_filled_threshold'])
+                             and mcp['state'] != 'IN_ROUTE']
 
     def clear_working_mcps(self):
         self.working_mcps = []
