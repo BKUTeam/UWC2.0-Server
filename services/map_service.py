@@ -14,6 +14,7 @@ class MapService:
         self.map_repository = map_repository
         self.user_repository = user_repository
 
+    # ###### Route involved method
     def get_optimize_routes_for_collector(self, collector_id: int, more_route=False):
         collector = self.user_repository.get_collector_by_id(collector_id)
         if collector is None:
@@ -77,17 +78,12 @@ class MapService:
         free_route.release()
         self.map_processing.release_redundant_route(free_route.opt_route)
 
-    def simulate_map_data(self):
-        depots = self.map_repository.get_all_depots()
-        mcps = self.map_repository.get_all_mcps()
-        factories = self.map_repository.get_all_factories()
-        return depots, mcps, factories
-
     # ###### GET ALL mcp, depot, factory
     def get_all_mcps(self):
         return self.map_repository.get_all_mcps()
 
     def get_all_depots(self):
+        self.map_repository.update_mcp_in_routes()
         return self.map_repository.get_all_depots()
 
     def get_all_factories(self):
@@ -95,8 +91,7 @@ class MapService:
 
     # ###### GET BY ID mcp, depot, factory
     def get_detail_mcp_by_id(self, mcp_id):
-        mcp = self.map_repository.get_mcp_by_id(mcp_id)
-        return mcp
+        return self.map_repository.get_mcp_by_id(mcp_id)
 
     def get_detail_depot_by_id(self, depot_id):
         depot = self.map_repository.get_depot_by_id(depot_id)
@@ -117,8 +112,7 @@ class MapService:
         return depot
 
     def get_detail_factory_by_id(self, factory_id):
-        factory = self.map_repository.get_factory_by_id(factory_id)
-        return factory
+        return self.map_repository.get_factory_by_id(factory_id)
 
     def get_mcps_of_depot(self, depot_id):
         return self.map_repository.get_mcps_of_depot(depot_id)

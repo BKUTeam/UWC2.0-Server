@@ -39,19 +39,19 @@ class MapRepository:
 
     def get_factory_by_id(self, factory_id):
         for factory in MapRepository.resource(self.factories_path):
-            if factory['id'] == factory_id:
+            if factory.get('id') == factory_id:
                 return factory
         return None
 
     def get_depot_by_id(self, depot_id):
         for depot in MapRepository.resource(self.depots_path):
-            if depot['id'] == depot_id:
+            if depot.get('id') == depot_id:
                 return depot
         return None
 
     def get_vehicle_by_id(self, vehicle_id):
         for vehicle in MapRepository.resource(self.vehicles_path):
-            if vehicle['id'] == vehicle_id:
+            if vehicle.get('id') == vehicle_id:
                 return vehicle
         return None
 
@@ -63,14 +63,22 @@ class MapRepository:
         return [vehicle for vehicle in MapRepository.resource(self.vehicles_path) if vehicle['depot_id'] == depot_id]
 
     def get_amount_full_mcps_of_depot(self, depot_id):
-        return len([mcp for mcp in MapRepository.resource(self.mcps_path) if mcp['depot_id'] == depot_id and mcp['state'] == "FULL"])
+        return len([mcp for mcp in MapRepository.resource(self.mcps_path) if
+                    mcp['depot_id'] == depot_id and mcp['state'] == "FULL"])
 
     def get_amount_in_route_mcps_of_depot(self, depot_id):
-        return len([mcp for mcp in MapRepository.resource(self.mcps_path) if mcp['depot_id'] == depot_id and mcp['state'] == "IN_ROUTE"])
+        return len([mcp for mcp in MapRepository.resource(self.mcps_path) if
+                    mcp['depot_id'] == depot_id and mcp['state'] == "IN_ROUTE"])
 
+    # ###### UPDATE data method
     def update_mcp_in_route(self, mcps_id):
         mcps = MapRepository.resource(self.mcps_path)
         for mcp_id in mcps_id:
-            mcps[mcp_id]['state'] = "IN_ROUTE"
+            for mcp in mcps:
+                if mcp.get('id') == mcp_id:
+                    mcp['state'] = "IN_ROUTE"
+                    break
         with open(self.mcps_path, 'w+') as f:
             json.dump(mcps, f, indent=2)
+        return True
+

@@ -43,7 +43,6 @@ class RouteResource(Resource):
             collector_id = int(request.args.get('collector-id'))
             routes = map_service.get_optimize_routes_for_collector(collector_id)
             collector = user_service.get_detail_collector_by_id(collector_id)
-            print(routes)
             result = json.dumps({"routes": routes}, default=obj_dict)
             return json.loads(result)
         except Exception as e:
@@ -105,7 +104,7 @@ class CollectorRoute(Resource):
     def get(self, collector_id=None):
         if collector_id is not None:
             route = user_service.get_collector_assigned_route_by_id(collector_id)
-            return json.loads(json.dumps(route,default=obj_dict))
+            return json.loads(json.dumps(route, default=obj_dict))
         else:
             return user_service.get_short_information_of_all_collector()
 
@@ -115,6 +114,19 @@ class Janitor(Resource):
     def get(self):
         janitors = user_service.get_short_information_of_all_collector()
         return janitors
+
+    def post(self):
+        try:
+            janitor_id = int(request.args.get('janitor-id'))
+            facility_id = int(request.args.get('facility-id'))
+            action = str(request.args.get('action'))
+            if action == "MCP":
+                result = user_service.assign_mcp_to_janitor(facility_id, janitor_id)
+            elif action == "DEPOT":
+                result = user_service.assign_depot_to_janitor(facility_id, janitor_id)
+            return result
+        except:
+            return "INVALID"
 
 
 class JanitorDetail(Resource):
