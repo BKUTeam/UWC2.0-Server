@@ -226,7 +226,9 @@ class MapProcessing:
         # We need to trim the list_node,
         # Because, the redundant factories is not used in phase 2
         # Bug: factory -> MCP in phase 2
-        factory_in_phase_2 = [node for index, node in enumerate(list_node_1) if index in index_of_end_factories]
+        # factory_in_phase_2 = [node for index, node in enumerate(list_node_1) if index in index_of_end_factories]
+        # -> this fail when two vehicles in same factories
+        factory_in_phase_2 = [list_node_1[index] for index in index_of_end_factories]
 
         # List node for phase 2
         list_node_2 = [depot] + [mcp for mcp in self.working_mcps] + factory_in_phase_2
