@@ -1,9 +1,8 @@
 import json
+import requests
 import os
 
-from dotenv import load_dotenv
-
-import requests
+from locals import Locals
 
 
 def gg_location_to_mapbox(gg_location: str):
@@ -32,19 +31,13 @@ class DirectionsAPI:
 
     @staticmethod
     def get_api_key():
-        load_dotenv()
-        api_type = os.getenv('API_TYPE')
-        if api_type == 'GOOGLE':
-            return os.getenv('GOOGLE_API_KEY')
-        elif api_type == 'MAPBOX':
-            return os.getenv('MAPBOX_API_KEY')
+        config = Locals.load_config()
+        if config['api_type'] == 'GOOGLE':
+            return config['google_api_key']
+        elif config['api_type'] == 'MAPBOX':
+            return config['mapbox_api_key']
         else:
             raise Exception("API key is invalid")
-
-    @staticmethod
-    def get_api_type():
-        load_dotenv()
-        return os.getenv('API_TYPE')
 
     @staticmethod
     def get_distance_google_api(origin, destination):

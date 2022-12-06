@@ -5,6 +5,7 @@ from map_processing_system.elements.route_node import OptimizeRouteNode
 from map_processing_system.directions_api import DirectionsAPI
 from map_processing_system.or_tools import VRPSolve
 from repositories.map_repository import MapRepository
+from uwc_logging import UwcLogger
 from utils import print_matrix
 
 DEFAULT_FILLED = 0
@@ -242,6 +243,8 @@ class MapProcessing:
 
     def get_more_optimize_routes(self, depot_id, vehicle_id):
         self.set_up_working_mcp(depot_id)
+
+        UwcLogger.add_info_log("MCP Pool", "Using mcp pool, previous length: {}".format(len(self.mcp_pool)))
         self.merge_pool_to_working_mcp()
         vehicles = [self.map_repo.get_vehicle_by_id(vehicle_id)]
         if vehicles[0] is None:
