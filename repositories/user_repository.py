@@ -42,7 +42,7 @@ class UserRepository:
     def get_vehicle_of_collector(self, collector_id):
         vehicles = UserRepository.resource(self.vehicles_path)
         for vehicle in vehicles:
-            if vehicle['collector_id'] == collector_id:
+            if vehicle.get('collector_id') == collector_id:
                 return vehicle
         return None
 
@@ -55,10 +55,27 @@ class UserRepository:
         return [janitor for janitor in UserRepository.resource(self.janitors_path)
                 if janitor.get('depot_id') == depot_id]
 
-    # def get_amount_collectors_of_depot(self, depot_id):
-    #     return len([collector for collector in UserRepository.resource(self.collectors_path)
-    #                 if collector['depot_id'] == depot_id])
+    # ###### UPDATE data method
+    def save_mcp_for_janitor(self, janitor_id, mcp_id):
+        janitors = UserRepository.resource(self.janitors_path)
+        for janitor in janitors:
+            if janitor.get('id') == janitor_id:
+                janitor['mcp_id'] = mcp_id
+                break
 
-    # def get_amount_janitors_of_depot(self, depot_id):
-    #     return len([collector for collector in UserRepository.resource(self.collectors_path)
-    #                 if collector['depot_id'] == depot_id])
+        with open(self.janitors_path, 'w+') as f:
+            json.dump(janitors, f, indent=2)
+
+        return True
+
+    def save_depot_for_janitor(self, janitor_id, depot_id):
+        janitors = UserRepository.resource(self.janitors_path)
+        for janitor in janitors:
+            if janitor.get('id') == janitor_id:
+                janitor['depot_id'] = depot_id
+                break
+
+        with open(self.janitors_path, 'w+') as f:
+            json.dump(janitors, f, indent=2)
+
+        return True

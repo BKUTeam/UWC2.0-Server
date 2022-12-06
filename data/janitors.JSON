@@ -61,8 +61,8 @@
   },
   {
     "id": 6,
-   "name": "Nguyen Van W",
-    "age": 29 ,
+    "name": "Nguyen Van W",
+    "age": 29,
     "gender": "female",
     "citizen_identification": "8192742847874",
     "phone_number": "086427627633",
@@ -74,7 +74,7 @@
   {
     "id": 7,
     "name": "Nguyen Van E",
-    "age": 32 ,
+    "age": 32,
     "gender": "male",
     "citizen_identification": "82372647292287",
     "phone_number": "09723636363",
@@ -203,7 +203,6 @@
     "mcp_id": 17,
     "depot_id": 9
   },
-
   {
     "id": 19,
     "name": "Nguyen Van K",

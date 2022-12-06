@@ -11,7 +11,8 @@ def fix_mcps():
                 depot_id += 1
             if 'depot_id' not in mcp:
                 mcp['depot_id'] = depot_id
-
+        for mcp in mcps:
+            mcp['state'] = "FREE"
     with open("./data/mcps.JSON", "w") as f:
         json.dump(mcps, f)
 
@@ -19,4 +20,3 @@ def fix_mcps():
 if __name__ == "__main__":
     # fix_mcps()
     print("hello")
-
