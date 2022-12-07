@@ -10,7 +10,7 @@ from locals import Locals
 
 
 class MapProcessing:
-    NOT_MOVE_DISTANCE = 1000000000 - 1
+    NOT_MOVE_DISTANCE = 999999999999 + 1
 
     def __init__(self, map_repository: MapRepository):
         self.map_repo = map_repository
@@ -64,6 +64,7 @@ class MapProcessing:
             route = routes_p1[i]
             list_location_1 = self.get_list_gg_location(list_node_p1)
             list_id_1 = self.get_list_id(list_node_p1)
+
             for index, node in enumerate(route):
                 merged_route.append(
                     OptimizeRouteNode(
@@ -71,8 +72,7 @@ class MapProcessing:
                         location=list_location_1[node.index],
                         reached_distance=node.distance,
                         loaded=node.loaded,
-                        type='DEPOT' if index == 0 else
-                        ('FACTORY' if index == len(route) - 1 else 'MCP')
+                        type=list_node_p1[node.index]['type']
                     )
                 )
 
@@ -89,20 +89,19 @@ class MapProcessing:
                         location=list_location_2[node.index],
                         reached_distance=node.distance,
                         loaded=node.loaded,
-                        type='FACTORY' if index == len(route) - 1 else 'MCP'
+                        type=list_node_p2[node.index]['type']
                     )
                 )
 
-            # comeback to depot by the first id
-            depot_id = list_id_1[0]
-            depot = self.map_repo.get_depot_by_id(depot_id)
+            depot = list_node_p1[0]
+            factory = merged_route[len(merged_route) - 1]
             merged_route.append(
                 OptimizeRouteNode(
-                    id=depot_id,
+                    id=depot['id'],
                     location=depot['gg_location'],
-                    reached_distance=0,
+                    reached_distance=DirectionsAPI.get_distance([factory.location, depot['gg_location']]),
                     loaded=0,
-                    type='DEPOT'
+                    type=depot['type']
                 )
             )
 
@@ -111,42 +110,43 @@ class MapProcessing:
 
         return all_routes
 
-    def handle_result_of_first_phase(self, result_phase_1, demand_all_nodes):
+    def get_list_node_for_next_phase(self, routes, list_node):
         """
-        Handle result in phase 1 to find route phase 2
-        -> get valid index of factories where vehicle was in
-        -> release demand of loaded
+        Handle result in phase 1 to get list node for phase 2
 
-        :param result_phase_1: solution from the first phase of routing
-        :param demand_all_nodes: demands (capacity) of all node (depot, mcps, factories)
-        :return: tuple(factory_indexes_of_factories, loaded_mcp_indexes_in_demands)
+        :param routes: all routes from the first phase
+        :param list_node: all nodes are used in the first phase
+        :return: new_list_node
         """
-        factories = self.map_repo.get_all_factories()
-        # Set up for the second phase: from factories to factories
-        factory_indexes_of_factories = []
-        loaded_mcp_indexes_in_demands = []
-        for route in result_phase_1:
+        offset = 0
+        for node in list_node:
+            if node['type'] != 'FACTORY':
+                offset += 1
+        num_factories = len(list_node) - offset
+
+        list_mcps = []
+        list_factories = []
+        for route in routes:
             for index, node in enumerate(route):
-                # last index is index of factory, this index need to reset
-                # because factory indexes are duplicated in phase 1 to compute routes
-                if index == len(route) - 1:
-                    offset = len(self.working_mcps) + 1  # offset mcps and depot
-                    new_factory_index = (index - offset) % len(factories) + offset
-                    node.index = new_factory_index  # update to valid index
-                    factory_indexes_of_factories.append(new_factory_index)
+                if index == 0:
+                    # not use depot in next phase
+                    continue
+                elif index == len(route) - 1:
+                    node.index = (node.index - offset) % num_factories + offset
+                    list_factories.append(list_node[node.index])
                 else:
-                    if node.index > 0:
-                        loaded_mcp_indexes_in_demands.append(node.index)
-                    demand_all_nodes[node.index] = 0
-        return factory_indexes_of_factories, loaded_mcp_indexes_in_demands
+                    # Mcp here
+                    list_mcps.append(list_node[node.index])
+
+        return list_mcps + list_factories
 
     # Main method below
 
-    def get_optimize_routes_from_depot_to_factories(self, original_distance_matrix: list[list[int]],
+    def get_optimize_routes_from_depot_to_factories(self, distance_matrix: list[list[int]],
                                                     demands: list[int], vehicles: list[int]):
         factories = self.map_repo.get_all_factories()
         data = {
-            'distance_matrix': original_distance_matrix,
+            'distance_matrix': distance_matrix,
             'demands': demands,
             'vehicle_capacities': vehicles,
             'num_vehicles': len(vehicles),
@@ -158,7 +158,7 @@ class MapProcessing:
         # Problem: vehicle may return to depot without move over any factories
         #  -> when vehicle is fulfilled, distance to depot < distance to any factories
         # Problem solved: or tools prefer to get more node than short distance
-        for i in range(len(original_distance_matrix) - len(factories), len(original_distance_matrix)):
+        for i in range(len(distance_matrix) - len(factories), len(distance_matrix)):
             data['distance_matrix'][i][0] = 0
 
         # duplicate the factories -> one factory can be move over by any vehicles
@@ -179,77 +179,70 @@ class MapProcessing:
         optimize_routes = VRPSolve(option='basic', data=data)
         return optimize_routes
 
-    def get_optimize_routes_from_factories_to_depot(self, original_distance_matrix: list[list[int]],
+    def get_optimize_routes_from_factories_to_depot(self, distance_matrix: list[list[int]],
                                                     demands: list[int], vehicles: list[int],
-                                                    factory_indexes_of_factories, loaded_mcp_indexes_in_demands):
+                                                    index_of_factories):
         data = {
-            'distance_matrix': original_distance_matrix,
+            'distance_matrix': distance_matrix,
             'demands': demands,
             'vehicle_capacities': vehicles,
             'num_vehicles': len(vehicles),
-            'starts': factory_indexes_of_factories,
-            'ends': factory_indexes_of_factories
+            'starts': index_of_factories,
+            'ends': index_of_factories
         }
-
-        for i in loaded_mcp_indexes_in_demands:
-            for j in range(len(data['distance_matrix'])):
-                # Restrict moving to all mcps in the first phase
-                data['distance_matrix'][i][j] = MapProcessing.NOT_MOVE_DISTANCE
-                data['distance_matrix'][j][i] = MapProcessing.NOT_MOVE_DISTANCE
 
         optimize_routes = VRPSolve(option='multi', data=data)
         return optimize_routes
 
     def get_optimize_routes(self, depot, vehicles):
         factories = self.map_repo.get_all_factories()
-        list_node_1 = [depot] + [mcp for mcp in self.working_mcps] + [factory for factory in factories]
 
-        # set up data to use or tools
+        depot['type'] = 'DEPOT'
+        list_node_1 = [depot]
+        for mcp in self.working_mcps:
+            mcp['type'] = 'MCP'
+            list_node_1.append(mcp)
+        for factory in factories:
+            factory['type'] = 'FACTORY'
+            list_node_1.append(factory)
+
+        # set up data to use or tools in the first phase
         list_location = self.get_list_gg_location(list_node_1)
         list_id = self.get_list_id(list_node_1)
         demand_all_nodes = self.get_list_capacity(list_node_1)
         vehicle_capacities = self.get_list_capacity(vehicles)
 
         result_phase_1 = self.get_optimize_routes_from_depot_to_factories(
-            DirectionsAPI.get_distance_matrix(list_location, list_id),
+            DirectionsAPI.get_distance_matrix(list_location, list_id, 'phase1'),
             demand_all_nodes[:],
             vehicle_capacities[:],
         )
 
         # handle result in phase 1 to find route phase 2
-        index_of_end_factories, loaded_mcp_indexes_in_demands \
-            = self.handle_result_of_first_phase(result_phase_1, demand_all_nodes)
+        new_list_node = self.get_list_node_for_next_phase(result_phase_1, list_node_1)
+        list_location = self.get_list_gg_location(new_list_node)
+        list_id = self.get_list_id(new_list_node)
+        demand_all_nodes = self.get_list_capacity(new_list_node)
 
-        # If number of factories > number of vehicles
-        # We need to trim the list_node,
-        # Because, the redundant factories is not used in phase 2
-        # Bug: factory -> MCP in phase 2
-        # factory_in_phase_2 = [node for index, node in enumerate(list_node_1) if index in index_of_end_factories]
-        # -> this fail when two vehicles in same factories
-        factory_in_phase_2 = [list_node_1[index] for index in index_of_end_factories]
-
-        # List node for phase 2
-        list_node_2 = [depot] + [mcp for mcp in self.working_mcps] + factory_in_phase_2
-        list_location = self.get_list_gg_location(list_node_2)
-        list_id = self.get_list_id(list_node_2)
-        demand_all_nodes = self.get_list_capacity(list_node_2)
+        index_of_factories = []
+        for index, node in enumerate(new_list_node):
+            if node['type'] == 'FACTORY':
+                index_of_factories.append(index)
 
         result_phase_2 = self.get_optimize_routes_from_factories_to_depot(
-            DirectionsAPI.get_distance_matrix(list_location, list_id),
+            DirectionsAPI.get_distance_matrix(list_location, list_id, 'phase2'),
             demands=demand_all_nodes[:],
             vehicles=vehicle_capacities[:],
-            factory_indexes_of_factories=list(range(len(list_node_2) - len(factory_in_phase_2), len(list_node_2))),
-            loaded_mcp_indexes_in_demands=loaded_mcp_indexes_in_demands[:]
+            index_of_factories=index_of_factories,
         )
 
-        list_merged_route = self.merge_routes(result_phase_1, result_phase_2, list_node_1, list_node_2)
+        list_merged_route = self.merge_routes(result_phase_1, result_phase_2, list_node_1, new_list_node)
         if list_merged_route is None:
             print("Merge routes failure!")
 
         list_optimize_route = []
         for index, merged_route in enumerate(list_merged_route):
             opt_route = OptimizeRoute(merged_route)
-            print(opt_route)
             list_optimize_route.append(opt_route)
         return list_optimize_route
 

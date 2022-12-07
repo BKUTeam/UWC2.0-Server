@@ -114,8 +114,8 @@ def VRPSolve(option, data) -> list[list[SimpleRouteNode]]:
     solution = routing.SolveWithParameters(search_parameters)
 
     # Print solution on console.
-    # if solution:
-    #     print_solution(data, manager, routing, solution)
+    if solution:
+        print_solution(data, manager, routing, solution)
 
     # print(json.dumps(get_solution(data, manager, routing, solution), indent=2))
     return get_solution(data, manager, routing, solution)
