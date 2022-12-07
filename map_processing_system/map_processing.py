@@ -10,7 +10,7 @@ from locals import Locals
 
 
 class MapProcessing:
-    NOT_MOVE_DISTANCE = 1000000000 - 1
+    NOT_MOVE_DISTANCE = 100000000000000000
 
     def __init__(self, map_repository: MapRepository):
         self.map_repo = map_repository
