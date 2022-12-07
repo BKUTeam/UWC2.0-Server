@@ -1,4 +1,6 @@
+import argparse
 import json
+import sys
 from time import time
 
 from map_processing_system.elements.route import OptimizeRoute, StoredRoute
@@ -9,75 +11,71 @@ from repositories.user_repository import UserRepository
 from services.map_service import MapService
 from utils import print_matrix, print_dict
 from locals import Locals
+from utils import print_scenario, print_stored_routes
 
 
-def print_stored_routes():
-    print("\n--------------------------------- Stored route ---------------------------------\n")
-    st_routes: list[StoredRoute] = StoredRoute.all_routes
-    for i, st_route in enumerate(st_routes):
-        print(" {}: type - {}, state - {} _____".format(i, st_route.type, st_route.state))
-        print(" Collector id: {}, depot id: {}".format(st_route.collector_id, st_route.depot_id))
-        for node in st_route.opt_route.list_node:
-            print('\t', node)
-    print("\n--------------------------------- Stored route ---------------------------------\n\n")
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-cid", "--collector_id",
+                        type=int,
+                        required=False)
 
-
-def print_scenario(map_repo: MapRepository, user_repo: UserRepository):
-    depots = map_repo.get_all_depots()
-
-    mcp_filled_threshold = Locals.load_config()['mcp_filled_threshold']
-    print("\n\n--------------------------------- UWC 2.0 Scenario ---------------------------------\n")
-    print(f"MCP filled threshold: {mcp_filled_threshold}%")
-
-    for depot in depots:
-        mcps = map_repo.get_mcps_of_depot(depot['id'])
-        mcps_exceed_threshold = [
-            mcp for mcp in mcps if mcp['filled'] > mcp_filled_threshold
-        ]
-        print(f"Depot {depot['id']}")
-        print(f"\tMCP: ")
-        print(f"\t\tNumber of MCPs: {len(mcps)}")
-        print(f"\t\tTotal filled of all MCPs: {sum(mcp['capacity'] * mcp['filled'] / 100 for mcp in mcps)}")
-        print(f"\t\tNumber of MCPs exceed filled threshold: {len(mcps_exceed_threshold)}")
-        print(f"\t\tTotal filled of exceeded MCPs: "
-              f"{sum(mcp['capacity'] * mcp['filled'] / 100 for mcp in mcps_exceed_threshold)}")
-
-    print("\n--------------------------------- UWC 2.0 Scenario ---------------------------------\n\n")
+    args = parser.parse_args()
+    return args
 
 
 if __name__ == "__main__":
+    args = parse_args()
+
     map_repo = MapRepository()
     user_repo = UserRepository()
     map_processing = MapProcessing(map_repository=map_repo)
     map_service = MapService(map_processing, map_repo, user_repo)
 
-    collectors = user_repo.get_all_collectors()
+    count_route = 0
+    count_valid_route = 0
 
     print_scenario(map_repo, user_repo)
 
+    collectors = []
+    if args.collector_id is not None:
+        col = user_repo.get_collector_by_id(args.collector_id)
+        if col:
+            collectors = [col]
+    else:
+        collectors = user_repo.get_all_collectors()
+
+    if len(collectors) == 0:
+        print("Not found collector")
+        sys.exit(1)
+
     start = time()
     for col in collectors:
-        if col['id'] != 17:
-            continue
+
         routes: list[OptimizeRoute] = map_service.get_optimize_routes_for_collector(collector_id=col['id'])
-        print("\n--------------------------------- Col id: {} ---------------------------------\n".format(col['id']))
+        print("\n\n--------------------------------- Col id: {} ---------------------------------\n".format(col['id']))
         for index, route in enumerate(routes):
+            count_route += 1
             route_info = route.get_route_info()
             print(f"Route {index}:")
             print_dict(route_info)
+
+            is_valid_route = route.is_valid_route_with_vehicle(condition={'vehicle_capacity': 4000})
+            if is_valid_route:
+                count_valid_route += 1
             print(f"Is valid for capacity {4000}: "
-                  f" {route.is_valid_route_with_vehicle(condition={'vehicle_capacity': 4000})}")
+                  f" {is_valid_route}")
             for node in route.list_node:
                 print('\t', node)
 
-        print("\n------------------------------------------------------------------\n\n")
+        print("\n-----------------------------------------------------------------------------\n\n")
 
-        print_stored_routes()
-        print(map_processing.mcp_pool)
+        print(f"Number of routes: {count_route}")
+        print(f"Number of valid routes: {count_valid_route}")
+        # print_stored_routes()
+        # print(map_processing.mcp_pool)
 
     end = time()
 
     time_to_solved = end - start
     print(time_to_solved)
-
-
