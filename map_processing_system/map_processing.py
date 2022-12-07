@@ -7,12 +7,10 @@ from map_processing_system.or_tools import VRPSolve
 from repositories.map_repository import MapRepository
 from uwc_logging import UwcLogger
 from locals import Locals
-Locals.load_config()[''] = 0
 
 
 class MapProcessing:
     NOT_MOVE_DISTANCE = 1000000000 - 1
-    Locals.load_config()[''] = 0
 
     def __init__(self, map_repository: MapRepository):
         self.map_repo = map_repository
@@ -62,7 +60,7 @@ class MapProcessing:
         for i in range(num_routes):
             merged_route = []
 
-            # create optimize route node from simple at phrase 1
+            # create optimize route node from simple at phase 1
             route = routes_p1[i]
             list_location_1 = self.get_list_gg_location(list_node_p1)
             list_id_1 = self.get_list_id(list_node_p1)
@@ -74,11 +72,11 @@ class MapProcessing:
                         reached_distance=node.distance,
                         loaded=node.loaded,
                         type='DEPOT' if index == 0 else
-                        ('MCP' if index in range(1, len(self.working_mcps) + 1) else 'FACTORY')
+                        ('FACTORY' if index == len(route) - 1 else 'MCP')
                     )
                 )
 
-            # create optimize route node from simple at phrase 1
+            # create optimize route node from simple at phase 1
             route = routes_p2[i]
             list_location_2 = self.get_list_gg_location(list_node_p2)
             list_id_2 = self.get_list_id(list_node_p2)
@@ -113,24 +111,24 @@ class MapProcessing:
 
         return all_routes
 
-    def handle_result_of_first_phrase(self, result_phrase_1, demand_all_nodes):
+    def handle_result_of_first_phase(self, result_phase_1, demand_all_nodes):
         """
-        Handle result in phrase 1 to find route phrase 2
+        Handle result in phase 1 to find route phase 2
         -> get valid index of factories where vehicle was in
         -> release demand of loaded
 
-        :param result_phrase_1: solution from the first phrase of routing
+        :param result_phase_1: solution from the first phase of routing
         :param demand_all_nodes: demands (capacity) of all node (depot, mcps, factories)
         :return: tuple(factory_indexes_of_factories, loaded_mcp_indexes_in_demands)
         """
         factories = self.map_repo.get_all_factories()
-        # Set up for the second phrase: from factories to factories
+        # Set up for the second phase: from factories to factories
         factory_indexes_of_factories = []
         loaded_mcp_indexes_in_demands = []
-        for route in result_phrase_1:
+        for route in result_phase_1:
             for index, node in enumerate(route):
                 # last index is index of factory, this index need to reset
-                # because factory indexes are duplicated in phrase 1 to compute routes
+                # because factory indexes are duplicated in phase 1 to compute routes
                 if index == len(route) - 1:
                     offset = len(self.working_mcps) + 1  # offset mcps and depot
                     new_factory_index = (index - offset) % len(factories) + offset
@@ -195,7 +193,7 @@ class MapProcessing:
 
         for i in loaded_mcp_indexes_in_demands:
             for j in range(len(data['distance_matrix'])):
-                # Restrict moving to all mcps in the first phrase
+                # Restrict moving to all mcps in the first phase
                 data['distance_matrix'][i][j] = MapProcessing.NOT_MOVE_DISTANCE
                 data['distance_matrix'][j][i] = MapProcessing.NOT_MOVE_DISTANCE
 
@@ -212,15 +210,15 @@ class MapProcessing:
         demand_all_nodes = self.get_list_capacity(list_node_1)
         vehicle_capacities = self.get_list_capacity(vehicles)
 
-        result_phrase_1 = self.get_optimize_routes_from_depot_to_factories(
+        result_phase_1 = self.get_optimize_routes_from_depot_to_factories(
             DirectionsAPI.get_distance_matrix(list_location, list_id),
             demand_all_nodes[:],
             vehicle_capacities[:],
         )
 
-        # handle result in phrase 1 to find route phrase 2
+        # handle result in phase 1 to find route phase 2
         index_of_end_factories, loaded_mcp_indexes_in_demands \
-            = self.handle_result_of_first_phrase(result_phrase_1, demand_all_nodes)
+            = self.handle_result_of_first_phase(result_phase_1, demand_all_nodes)
 
         # If number of factories > number of vehicles
         # We need to trim the list_node,
@@ -236,7 +234,7 @@ class MapProcessing:
         list_id = self.get_list_id(list_node_2)
         demand_all_nodes = self.get_list_capacity(list_node_2)
 
-        result_phrase_2 = self.get_optimize_routes_from_factories_to_depot(
+        result_phase_2 = self.get_optimize_routes_from_factories_to_depot(
             DirectionsAPI.get_distance_matrix(list_location, list_id),
             demands=demand_all_nodes[:],
             vehicles=vehicle_capacities[:],
@@ -244,7 +242,7 @@ class MapProcessing:
             loaded_mcp_indexes_in_demands=loaded_mcp_indexes_in_demands[:]
         )
 
-        list_merged_route = self.merge_routes(result_phrase_1, result_phrase_2, list_node_1, list_node_2)
+        list_merged_route = self.merge_routes(result_phase_1, result_phase_2, list_node_1, list_node_2)
         if list_merged_route is None:
             print("Merge routes failure!")
 
@@ -291,5 +289,3 @@ class MapProcessing:
         self.map_repo.update_mcp_in_route(picked_mcps)
 
         return "success"
-
-

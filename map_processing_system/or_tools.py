@@ -47,7 +47,7 @@ def print_solution(data, manager, routing, solution):
         total_distance += route_distance
         total_load += route_load
     print('Total distance of all routes: {}m'.format(total_distance))
-    print('Total load of all routes: {}'.format(total_load))
+    print('Total load of all routes: {}\n\n'.format(total_load))
 
 
 def VRPSolve(option, data) -> list[list[SimpleRouteNode]]:
@@ -114,8 +114,8 @@ def VRPSolve(option, data) -> list[list[SimpleRouteNode]]:
     solution = routing.SolveWithParameters(search_parameters)
 
     # Print solution on console.
-    if solution:
-        print_solution(data, manager, routing, solution)
+    # if solution:
+    #     print_solution(data, manager, routing, solution)
 
     # print(json.dumps(get_solution(data, manager, routing, solution), indent=2))
     return get_solution(data, manager, routing, solution)

@@ -141,5 +141,5 @@ class DirectionsAPI:
             )
         )
         res_data = json.loads(res.text)
-        print(json.dumps(res_data, indent=2))
+        # print(json.dumps(res_data, indent=2))
         return res_data["distances"]

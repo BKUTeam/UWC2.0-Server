@@ -19,12 +19,12 @@ class Locals:
             UwcLogger.add_error_log(".env", "API_TYPE Not found")
 
         if api_type == 'MAPBOX':
-            UwcLogger.add_info_log(".env", "Using MAPBOX api")
+            # UwcLogger.add_info_log(".env", "Using MAPBOX api")
             if mapbox_api_key is None:
                 UwcLogger.add_error_log(".env", "MAPBOX_API_KEY Not found")
 
         elif api_type == 'GOOGLE':
-            UwcLogger.add_info_log(".env", "Using GOOGLE api")
+            # UwcLogger.add_info_log(".env", "Using GOOGLE api")
             if google_api_key is None:
                 UwcLogger.add_error_log(".env", "GOOGLE_API_KEY Not found")
 
