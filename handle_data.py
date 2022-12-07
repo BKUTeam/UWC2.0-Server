@@ -1,4 +1,7 @@
 import json
+import random
+
+from locals import Locals
 
 
 def fix_mcps():
@@ -17,28 +20,35 @@ def fix_mcps():
         json.dump(mcps, f)
 
 
-def print_uwc_scenario():
-
-    with open('./data/mcp.JSON', "r") as f:
+def handle_filled_mcps():
+    with open('./data/mcps.JSON', "r+") as f:
         mcps = json.load(f)
 
-    with open('./data/depots.JSON', "r") as f:
-        depots = json.load(f)
+    exceeded_percent = 0.7
+    exceeded_mcp_percent = 0.8
+    filled_threshold = Locals.load_config()['mcp_filled_threshold']
+    exceeded_mcp_percent_2 = 0.6
 
-    print("--------------------------------------------------------------------")
+    for mcp in mcps:
+        ran_num = random.random()
+        if ran_num < exceeded_percent:
+            ran_mcp = random.random()
 
-    for depot in depots:
-        print(f"Depot {depot['id']}")
-        print(f"\t")
-        print(f"\t")
-        print(f"\t")
-        print(f"\t")
-        print(f"\t")
+            if ran_mcp < exceeded_mcp_percent:
+                mcp['filled'] = random.randint(filled_threshold, 100)
+            else:
+                mcp['filled'] = random.randint(20, filled_threshold)
 
-    print("--------------------------------------------------------------------")
+        else:
+            ran_mcp = random.random()
+            if ran_mcp > exceeded_mcp_percent_2:
+                mcp['filled'] = random.randint(filled_threshold, 100)
+            else:
+                mcp['filled'] = random.randint(20, filled_threshold)
 
+        with open("./data/mcps.JSON", "w") as f:
+            json.dump(mcps, f, indent=2)
 
 
 if __name__ == "__main__":
-    # fix_mcps()
-    print("hello")
+    handle_filled_mcps()
