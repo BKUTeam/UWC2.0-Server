@@ -11,6 +11,7 @@ from repositories.map_repository import MapRepository
 from repositories.user_repository import UserRepository
 from services.map_service import MapService
 from services.user_service import UserService
+from utils import print_scenario
 
 app = Flask(__name__)
 CORS(app, resources={r"*": {"origins": "*"}})
@@ -30,6 +31,8 @@ map_service = MapService(
     user_repository=user_repository
 )
 user_service = UserService(user_repository=user_repository)
+
+print_scenario(map_repo=map_repository, user_repo=user_repository)
 
 
 # convert to json data

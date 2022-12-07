@@ -24,6 +24,14 @@ class DirectionsAPI:
                                  "&destinations={destinations}" \
                                  "&key={api_key}"
 
+    MAPBOX_DISTANCE_URL = "https://api.mapbox.com/directions/v5/mapbox/driving/" \
+                          "{coordinates}?" \
+                          "&geometries=geojson" \
+                          "&language=en" \
+                          "&overview=simplified" \
+                          "&steps=true" \
+                          "&access_token={api_key}"
+
     MAPBOX_DISTANCE_MATRIX_URL = "https://api.mapbox.com/directions-matrix/v1/mapbox/driving/" \
                                  "{coordinates}?" \
                                  "annotations=distance" \
@@ -130,6 +138,29 @@ class DirectionsAPI:
                 json.dump(distance_matrix, f, indent=2)
 
             return distance_matrix
+
+    @staticmethod
+    def get_distance(list_location):
+        api_type = DirectionsAPI.get_api_type()
+        if api_type == 'GOOGLE':
+            distance = DirectionsAPI.get_distance_google_api(list_location, list_location)
+        elif api_type == 'MAPBOX':
+            distance = DirectionsAPI.get_distance_mapbox_api(list_location)
+        else:
+            raise Exception("API key is invalid")
+        return distance
+
+    @staticmethod
+    def get_distance_mapbox_api(list_location):
+        res = requests.request(
+            'GET',
+            url=DirectionsAPI.MAPBOX_DISTANCE_URL.format(
+                coordinates=";".join([gg_location_to_mapbox(gg_location) for gg_location in list_location]),
+                api_key=DirectionsAPI.get_api_key()
+            )
+        )
+        res_data = json.loads(res.text)
+        return res_data
 
     @staticmethod
     def get_distance_matrix_mapbox_api(list_location):

@@ -2,12 +2,13 @@ from enum import Enum
 
 from locals import Locals
 from map_processing_system.elements.route_node import OptimizeRouteNode
+from map_processing_system.directions_api import DirectionsAPI
 
 
 class OptimizeRoute:
     def __init__(self, list_node: list[OptimizeRouteNode]):
         self.list_node = list_node
-        self.render_route = ""
+        self.render_route = DirectionsAPI.get_distance([node.location for node in list_node])
         self.id = -1
 
     def get_route_info(self):
