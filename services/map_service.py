@@ -16,9 +16,18 @@ class MapService:
         self.map_repository = map_repository
         self.user_repository = user_repository
 
+    def update_mcp_state_in_route(self, route):
+        picked_mcps = []
+        for node in route.list_node:
+            if node.type == 'MCP':
+                picked_mcps.append(node.object_id)
+        self.map_repository.update_mcp_in_route(picked_mcps)
+
+        return "success"
+
     # ###### Route involved method
-    def get_optimize_routes_for_collector_v2(self, collector_id: int, low_threshold: bool = False,
-                                             more_route: bool = False):
+    def get_optimize_routes_for_collector_v2(self, collector_id: int, use_low_threshold: bool = False,
+                                             use_mcp_pool: bool = False):
         try:
             collector = self.user_repository.get_collector_by_id(collector_id)
 
@@ -31,15 +40,15 @@ class MapService:
             depot_id = collector['depot_id']
             vehicle_id = collector['vehicle_id']
 
-            if more_route:
+            if use_mcp_pool:
                 # Use mcp pool here
                 vehicle = self.map_repository.get_vehicle_by_id(vehicle_id)
                 vehicle_capacities = [vehicle['capacity']] * 2
 
                 # TODO: Get routes
-                all_routes = self.map_processing.get_more_optimize_routes(depot_id, vehicle_capacities)
+                all_routes = self.map_processing.get_optimize_routes_with_mcp_pool(depot_id, vehicle_capacities)
             else:
-                if not low_threshold:
+                if not use_low_threshold:
                     # Return available route in last request
                     routes = StoredRoute.get_free_routes_of_collector(collector_id)
                     if len(routes) > 0:
@@ -60,10 +69,10 @@ class MapService:
 
                 # TODO: Get routes
                 all_routes \
-                    = self.map_processing.get_optimize_routes_of_depot(depot_id, vehicle_capacities, low_threshold)
+                    = self.map_processing.get_optimize_routes_of_depot(depot_id, vehicle_capacities, use_low_threshold)
 
             for opt_route in all_routes:
-                StoredRoute.store_route(opt_route, depot_id, ('ORIGIN' if not more_route else 'OPTIONAL'), collector_id)
+                StoredRoute.store_route(opt_route, depot_id, ('ORIGIN' if not use_mcp_pool else 'OPTIONAL'), collector_id)
 
             return all_routes
 
@@ -98,7 +107,7 @@ class MapService:
 
             route.assign_to(collector_id)
 
-            self.map_processing.update_mcp_state_in_route(route.opt_route)
+            self.update_mcp_state_in_route(route.opt_route)
             self.user_repository.update_state_of_collector(collector_id, 'BUSY')
 
             routes = StoredRoute.get_free_routes_by_depot_id(collector['depot_id'])
@@ -120,13 +129,13 @@ class MapService:
             print(ex, traceback.format_exc())
             return False
 
-    def release_route_v2(self, free_route: StoredRoute):
+    def release_route_v2(self, route: StoredRoute):
         """
         This method release a route, release Stored Route and release node into MCP Pool of Map Processing.
 
-        :param free_route: StoredRoute has FREE state
+        :param route: StoredRoute has FREE state
         """
-        free_route.release()
+        route.release()
         # self.map_processing.release_redundant_route(free_route.opt_route)
 
     # ###### GET ALL mcp, depot, factory
@@ -150,14 +159,14 @@ class MapService:
         in_route_mcps_amount = self.map_repository.get_amount_in_route_mcps_of_depot(depot_id)
         collector_amount = len(self.user_repository.get_collectors_of_depot(depot_id))
         janitor_amount = len(self.user_repository.get_janitors_of_depot(depot_id))
-        vehical_amount = len(self.map_repository.get_vehicles_of_depot(depot_id))
+        vehicle_amount = len(self.map_repository.get_vehicles_of_depot(depot_id))
         depot['mcps_amount'] = mcps_amount
         depot['full_mcps_amount'] = full_mcps_amount
         depot['in_route_mcps_amount'] = in_route_mcps_amount
         depot['worker_amount'] = collector_amount + janitor_amount
         depot['collector_amount'] = collector_amount
         depot['janitor_amount'] = janitor_amount
-        depot['vehical_amount'] = vehical_amount
+        depot['vehicle_amount'] = vehicle_amount
 
         return depot
 

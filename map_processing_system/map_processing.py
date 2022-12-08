@@ -4,13 +4,14 @@ import uwc_logging
 from map_processing_system.elements.route import OptimizeRoute
 from map_processing_system.elements.route_node import OptimizeRouteNode
 from map_processing_system.directions_api import DirectionsAPI
-from map_processing_system.or_tools import VRPSolve
+from map_processing_system.or_tools import RoutingOrTools
 from repositories.map_repository import MapRepository
 from uwc_logging import UwcLogger
 from locals import Locals
 
 
 class MapProcessing:
+
     NOT_MOVE_DISTANCE = 999999999999 + 1
 
     def __init__(self, map_repository: MapRepository):
@@ -18,14 +19,32 @@ class MapProcessing:
         self.mcp_pool: list[int] = []
         self.working_mcps: list = []
 
-    # Helper method below
+    # Utils method below
+    @staticmethod
+    def get_list_id(list_node):
+        return [node['id'] for node in list_node]
 
-    def release_redundant_route(self, route: OptimizeRoute):
-        for node in route.list_node:
-            if node.type == 'MCP':
-                self.mcp_pool.append(node.object_id)
+    @staticmethod
+    def get_list_gg_location(list_node):
+        return [node['gg_location'] for node in list_node]
 
-    def set_up_working_mcp(self, depot_id, low_threshold=False):
+    @staticmethod
+    def get_list_capacity(list_node):
+        return [(int(node['capacity'] * node['filled'] / 100) if ('capacity' in node and 'filled' in node)
+                 else
+                 (int(node['capacity']) if 'capacity' in node else 0))
+                for node in list_node]
+
+    # Helpers method below
+
+    def set_up_working_mcps(self, depot_id, low_threshold=False):
+        """
+        This method set up the working mcps
+        Take mcps list from database, fill the mcp has state is 'FREE'
+        and filled percent must be exceeded threshold
+
+        """
+
         mcps = self.map_repo.get_mcps_of_depot(depot_id)
 
         if low_threshold:
@@ -37,26 +56,49 @@ class MapProcessing:
                              if ('filled' in mcp) and (mcp['filled'] >= threshold)
                              and mcp['state'] == 'FREE']
 
-    def clear_working_mcps(self):
-        self.working_mcps = []
+    def merge_mcp_pool_into_working_mcps(self):
+        """
+        This method merge the mcp pool into working mcps
+        MCP pool just hold the id of mcps, so state of merging mcp must be 'FREE'
 
-    def merge_pool_to_working_mcp(self):
+
+        """
         # Not using low threshold when working with mcp pool
         mcps = self.map_repo.get_all_mcps()
         self.working_mcps += [mcp for mcp in mcps
-                              if mcp['id'] in self.mcp_pool and mcp['state'] == 'FREE' and mcp['filled']]
+                              if mcp['id'] in self.mcp_pool and mcp['state'] == 'FREE']
 
-    def get_list_id(self, list_node):
-        return [node['id'] for node in list_node]
+    def get_list_node_for_next_phase(self, routes, prev_list_node):
+        """
+        Handle result in phase 1 to get list node for phase 2
 
-    def get_list_gg_location(self, list_node):
-        return [node['gg_location'] for node in list_node]
+        :param routes: all routes from the first phase
+        :param prev_list_node: all nodes are used in the first phase
+        :return: new_list_node
+        """
+        offset = 0
+        for node in prev_list_node:
+            if node['type'] != 'FACTORY':
+                offset += 1
+        num_factories = len(prev_list_node) - offset
 
-    def get_list_capacity(self, list_node):
-        return [(int(node['capacity'] * node['filled'] / 100) if ('capacity' in node and 'filled' in node)
-                 else
-                 (int(node['capacity']) if 'capacity' in node else 0))
-                for node in list_node]
+        list_picked_mcps = []
+        list_factories = []
+        for route in routes:
+            for index, node in enumerate(route):
+                if index == 0:
+                    # not use depot in next phase
+                    continue
+                elif index == len(route) - 1:
+                    node.index = (node.index - offset) % num_factories + offset
+                    list_factories.append(prev_list_node[node.index])
+                else:
+                    # Mcp here
+                    list_picked_mcps.append(prev_list_node[node.index])
+
+        list_mcps = [node for node in prev_list_node if node.get('type') == 'MCP' and node not in list_picked_mcps]
+
+        return list_mcps + list_factories
 
     def merge_routes(self, routes_p1, routes_p2, list_node_p1, list_node_p2) \
             -> list[list[OptimizeRouteNode]] | None:
@@ -120,38 +162,6 @@ class MapProcessing:
 
         return all_routes
 
-    def get_list_node_for_next_phase(self, routes, list_node):
-        """
-        Handle result in phase 1 to get list node for phase 2
-
-        :param routes: all routes from the first phase
-        :param list_node: all nodes are used in the first phase
-        :return: new_list_node
-        """
-        offset = 0
-        for node in list_node:
-            if node['type'] != 'FACTORY':
-                offset += 1
-        num_factories = len(list_node) - offset
-
-        list_picked_mcps = []
-        list_factories = []
-        for route in routes:
-            for index, node in enumerate(route):
-                if index == 0:
-                    # not use depot in next phase
-                    continue
-                elif index == len(route) - 1:
-                    node.index = (node.index - offset) % num_factories + offset
-                    list_factories.append(list_node[node.index])
-                else:
-                    # Mcp here
-                    list_picked_mcps.append(list_node[node.index])
-
-        list_mcps = [node for node in list_node if node.get('type') == 'MCP' and node not in list_picked_mcps]
-
-        return list_mcps + list_factories
-
     # Main method below
 
     def get_optimize_routes_from_depot_to_factories(self, distance_matrix: list[list[int]],
@@ -188,7 +198,7 @@ class MapProcessing:
         data['distance_matrix'] += new_rows
         data['demands'] += data['demands'][-len(factories):] * (data['num_vehicles'] - 1)
 
-        optimize_routes = VRPSolve(option='basic', data=data)
+        optimize_routes = RoutingOrTools.VRPSolve(option='basic', data=data)
         return optimize_routes
 
     def get_optimize_routes_from_factories_to_depot(self, distance_matrix: list[list[int]],
@@ -203,7 +213,7 @@ class MapProcessing:
             'ends': index_of_factories
         }
 
-        optimize_routes = VRPSolve(option='multi', data=data)
+        optimize_routes = RoutingOrTools.VRPSolve(option='multi', data=data)
         return optimize_routes
 
     def get_optimize_routes(self, depot, vehicles):
@@ -258,9 +268,9 @@ class MapProcessing:
             list_optimize_route.append(opt_route)
         return list_optimize_route
 
-    def get_optimize_routes_of_depot(self, depot_id: int, vehicle_capacities=None, low_threshold=False):
+    def get_optimize_routes_of_depot(self, depot_id: int, vehicle_capacities=None, use_low_threshold=False):
         depot = self.map_repo.get_depot_by_id(depot_id)
-        self.set_up_working_mcp(depot_id, low_threshold)
+        self.set_up_working_mcps(depot_id, use_low_threshold)
 
         if vehicle_capacities is not None:
             vehicles = [{'capacity': v_c} for v_c in vehicle_capacities]
@@ -269,11 +279,11 @@ class MapProcessing:
 
         return self.get_optimize_routes(depot, vehicles)
 
-    def get_more_optimize_routes(self, depot_id, vehicle_capacities=None):
-        self.set_up_working_mcp(depot_id)
+    def get_optimize_routes_with_mcp_pool(self, depot_id, vehicle_capacities=None):
+        self.set_up_working_mcps(depot_id)
 
         UwcLogger.add_info_log("MCP Pool", "Using mcp pool, previous length: {}".format(len(self.mcp_pool)))
-        self.merge_pool_to_working_mcp()
+        self.merge_mcp_pool_into_working_mcps()
 
         if vehicle_capacities is not None:
             vehicles = [{'capacity': v_c} for v_c in vehicle_capacities]
@@ -292,15 +302,6 @@ class MapProcessing:
         self.mcp_pool = [mcp_id for mcp_id in self.mcp_pool if mcp_id in picked_mcps]
 
         return optimize_routes
-
-    def update_mcp_state_in_route(self, route):
-        picked_mcps = []
-        for node in route.list_node:
-            if node.type == 'MCP':
-                picked_mcps.append(node.object_id)
-        self.map_repo.update_mcp_in_route(picked_mcps)
-
-        return "success"
 
     def merge_pool_from_depot(self, depot_id):
         mcps = self.map_repo.get_mcps_of_depot(depot_id)
