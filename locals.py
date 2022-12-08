@@ -12,6 +12,7 @@ class Locals:
         api_type = os.getenv('API_TYPE')
         mapbox_api_key = os.getenv('MAPBOX_API_KEY')
         mcp_filled_threshold = os.getenv('MCP_FILLED_THRESHOLD')
+        mcp_filled_threshold_low = os.getenv('MCP_FILLED_THRESHOLD_LOW')
         google_api_key = os.getenv('GOOGLE_API_KEY')
         default_loaded_percent = os.getenv('DEFAULT_LOADED_PERCENT')
 
@@ -34,6 +35,12 @@ class Locals:
         else:
             mcp_filled_threshold = int(os.getenv('MCP_FILLED_THRESHOLD'))
 
+        if mcp_filled_threshold_low is None:
+            mcp_filled_threshold_low = 20
+            UwcLogger.add_info_log(".env", "Using default MCP low filled threshold {}".format(mcp_filled_threshold_low))
+        else:
+            mcp_filled_threshold_low = int(os.getenv('MCP_FILLED_THRESHOLD_LOW'))
+
         if default_loaded_percent is None:
             default_loaded_percent = 70
             UwcLogger.add_info_log(".env", "Using default loaded percent {}".format(default_loaded_percent))
@@ -42,6 +49,7 @@ class Locals:
 
         return {
             'mcp_filled_threshold': mcp_filled_threshold,
+            'mcp_filled_threshold_low': mcp_filled_threshold_low,
             'api_type': api_type,
             'mapbox_api_key': mapbox_api_key,
             'google_api_key': google_api_key,

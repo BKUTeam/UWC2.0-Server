@@ -25,18 +25,26 @@ class MapProcessing:
             if node.type == 'MCP':
                 self.mcp_pool.append(node.object_id)
 
-    def set_up_working_mcp(self, depot_id):
+    def set_up_working_mcp(self, depot_id, low_threshold=False):
         mcps = self.map_repo.get_mcps_of_depot(depot_id)
+
+        if low_threshold:
+            threshold = Locals.load_config()['mcp_filled_threshold_low']
+        else:
+            threshold = Locals.load_config()['mcp_filled_threshold']
+
         self.working_mcps = [mcp for mcp in mcps
-                             if ('filled' in mcp) and (mcp['filled'] >= Locals.load_config()['mcp_filled_threshold'])
-                             and mcp['state'] != 'IN_ROUTE']
+                             if ('filled' in mcp) and (mcp['filled'] >= threshold)
+                             and mcp['state'] == 'FREE']
 
     def clear_working_mcps(self):
         self.working_mcps = []
 
     def merge_pool_to_working_mcp(self):
+        # Not using low threshold when working with mcp pool
         mcps = self.map_repo.get_all_mcps()
-        self.working_mcps += [mcp for mcp in mcps if mcp['id'] in self.mcp_pool and mcp['state'] == 'FREE']
+        self.working_mcps += [mcp for mcp in mcps
+                              if mcp['id'] in self.mcp_pool and mcp['state'] == 'FREE' and mcp['filled']]
 
     def get_list_id(self, list_node):
         return [node['id'] for node in list_node]
@@ -250,9 +258,9 @@ class MapProcessing:
             list_optimize_route.append(opt_route)
         return list_optimize_route
 
-    def get_optimize_routes_of_depot(self, depot_id: int, vehicle_capacities=None):
+    def get_optimize_routes_of_depot(self, depot_id: int, vehicle_capacities=None, low_threshold=False):
         depot = self.map_repo.get_depot_by_id(depot_id)
-        self.set_up_working_mcp(depot_id)
+        self.set_up_working_mcp(depot_id, low_threshold)
 
         if vehicle_capacities is not None:
             vehicles = [{'capacity': v_c} for v_c in vehicle_capacities]

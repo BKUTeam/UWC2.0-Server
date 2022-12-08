@@ -52,21 +52,31 @@ class RouteResource(Resource):
         try:
             collector_id = int(request.args.get('collector-id'))
             mcp_pool_flag = str(request.args.get('use-mcp-pool')).lower()
+            low_threshold_flag = str(request.args.get('use-low-threshold')).lower()
+
+            if low_threshold_flag == 'true':
+                low_threshold = True
+            elif low_threshold_flag == 'none' or mcp_pool_flag == 'false':
+                low_threshold = False
+            else:
+                message = "[use-low-threshold] option is invalid"
+                result = json.dumps({"message": message})
+                return json.loads(result)
 
             if mcp_pool_flag == 'true':
-                results = map_service.get_optimize_routes_for_collector_v2(collector_id, True)
+                result = map_service.get_optimize_routes_for_collector_v2(collector_id, low_threshold, True)
             elif mcp_pool_flag == 'none' or mcp_pool_flag == 'false':
-                results = map_service.get_optimize_routes_for_collector_v2(collector_id)
+                result = map_service.get_optimize_routes_for_collector_v2(collector_id, low_threshold)
             else:
-                results = "[use-mcp-pool] option is invalid"
+                result = "[use-mcp-pool] option is invalid"
 
-            collector = user_service.get_detail_collector_by_id(collector_id)
+            # collector = user_service.get_detail_collector_by_id(collector_id)
 
-            if isinstance(results, list):
-                print(results)
-                result = json.dumps({"routes": results}, default=obj_dict)
+            if isinstance(result, list):
+                print(result)
+                result = json.dumps({"routes": result}, default=obj_dict)
             else:
-                result = json.dumps({"message": results})
+                result = json.dumps({"message": result})
 
             return json.loads(result)
 

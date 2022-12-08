@@ -5,8 +5,8 @@
     "area": 4,
     "gg_location": "10.777928968541563,106.64591391363233",
     "capacity": 1750,
-    "filled": 71,
-    "state": "IN_ROUTE",
+    "filled": 34,
+    "state": "FREE",
     "depot_id": 1
   },
   {
@@ -15,7 +15,7 @@
     "area": 5,
     "gg_location": "10.782111529765048,106.634818140168",
     "capacity": 1700,
-    "filled": 63,
+    "filled": 100,
     "state": "FREE",
     "depot_id": 1
   },
@@ -25,7 +25,7 @@
     "area": 4,
     "gg_location": "10.788109067395224,106.62216644872153",
     "capacity": 1800,
-    "filled": 57,
+    "filled": 96,
     "state": "FREE",
     "depot_id": 1
   },
@@ -35,7 +35,7 @@
     "area": 4,
     "gg_location": "10.79884176424654,106.62842544123114",
     "capacity": 1700,
-    "filled": 93,
+    "filled": 96,
     "state": "FREE",
     "depot_id": 1
   },
@@ -45,8 +45,8 @@
     "area": 4,
     "gg_location": "10.808603965399117,106.6181765089875",
     "capacity": 1750,
-    "filled": 73,
-    "state": "IN_ROUTE",
+    "filled": 88,
+    "state": "FREE",
     "depot_id": 1
   },
   {
@@ -55,7 +55,7 @@
     "area": 4,
     "gg_location": "10.807603409675089,106.60248024916936",
     "capacity": 1800,
-    "filled": 33,
+    "filled": 93,
     "state": "FREE",
     "depot_id": 1
   },
@@ -65,7 +65,7 @@
     "area": 4,
     "gg_location": "10.824473936611858,106.60237356931178",
     "capacity": 1850,
-    "filled": 90,
+    "filled": 78,
     "state": "FREE",
     "depot_id": 1
   },
@@ -75,7 +75,7 @@
     "area": 4,
     "gg_location": "10.835266384112748,106.61378844729671",
     "capacity": 1700,
-    "filled": 51,
+    "filled": 39,
     "state": "FREE",
     "depot_id": 1
   },
@@ -85,8 +85,8 @@
     "area": 4,
     "gg_location": "10.850249428594596,106.61677551703673",
     "capacity": 1750,
-    "filled": 93,
-    "state": "IN_ROUTE",
+    "filled": 97,
+    "state": "FREE",
     "depot_id": 1
   },
   {
@@ -95,8 +95,8 @@
     "area": 4,
     "gg_location": "10.854762762884334,106.6148862950544",
     "capacity": 1750,
-    "filled": 75,
-    "state": "IN_ROUTE",
+    "filled": 83,
+    "state": "FREE",
     "depot_id": 1
   },
   {
@@ -105,7 +105,7 @@
     "area": 4,
     "gg_location": "10.867432144493042,106.61574120266383",
     "capacity": 1800,
-    "filled": 54,
+    "filled": 35,
     "state": "FREE",
     "depot_id": 2
   },
@@ -115,7 +115,7 @@
     "area": 4,
     "gg_location": "10.884989603950215,106.61741925861226",
     "capacity": 1850,
-    "filled": 41,
+    "filled": 60,
     "state": "FREE",
     "depot_id": 2
   },
@@ -125,8 +125,8 @@
     "area": 4,
     "gg_location": "10.885073890378134,106.61729051257286",
     "capacity": 1700,
-    "filled": 91,
-    "state": "IN_ROUTE",
+    "filled": 76,
+    "state": "FREE",
     "depot_id": 2
   },
   {
@@ -135,7 +135,7 @@
     "area": 4,
     "gg_location": "10.901420712262409,106.62498279930146",
     "capacity": 1750,
-    "filled": 79,
+    "filled": 93,
     "state": "FREE",
     "depot_id": 2
   },
@@ -145,7 +145,7 @@
     "area": 4,
     "gg_location": "10.907113972862003,106.63703157160587",
     "capacity": 1800,
-    "filled": 82,
+    "filled": 76,
     "state": "FREE",
     "depot_id": 2
   },
@@ -155,7 +155,7 @@
     "area": 4,
     "gg_location": "10.913182083522466,106.65248109633302",
     "capacity": 1750,
-    "filled": 52,
+    "filled": 62,
     "state": "FREE",
     "depot_id": 2
   },
@@ -165,8 +165,8 @@
     "area": 4,
     "gg_location": "10.908083193295498,106.66243745598928",
     "capacity": 1800,
-    "filled": 90,
-    "state": "IN_ROUTE",
+    "filled": 97,
+    "state": "FREE",
     "depot_id": 2
   },
   {
@@ -175,7 +175,7 @@
     "area": 4,
     "gg_location": "10.896334286464153,106.66143570490172",
     "capacity": 1800,
-    "filled": 82,
+    "filled": 84,
     "state": "FREE",
     "depot_id": 2
   },
@@ -185,7 +185,7 @@
     "area": 4,
     "gg_location": "10.896334286464153,106.66143570490172",
     "capacity": 1750,
-    "filled": 98,
+    "filled": 78,
     "state": "FREE",
     "depot_id": 2
   },
@@ -196,7 +196,7 @@
     "gg_location": "10.894488115257076,106.63372141120908",
     "capacity": 1750,
     "filled": 94,
-    "state": "IN_ROUTE",
+    "state": "FREE",
     "depot_id": 2
   },
   {
@@ -205,7 +205,7 @@
     "area": 4,
     "gg_location": "10.864511968062425,106.63739933247801",
     "capacity": 1700,
-    "filled": 20,
+    "filled": 69,
     "state": "FREE",
     "depot_id": 3
   },
@@ -215,7 +215,7 @@
     "area": 4,
     "gg_location": "10.853352579522351,106.62667715500776",
     "capacity": 1800,
-    "filled": 56,
+    "filled": 72,
     "state": "FREE",
     "depot_id": 3
   },
@@ -225,7 +225,7 @@
     "area": 4,
     "gg_location": "10.843265487421593,106.63244717768472",
     "capacity": 1850,
-    "filled": 76,
+    "filled": 84,
     "state": "FREE",
     "depot_id": 3
   },
@@ -235,7 +235,7 @@
     "area": 4,
     "gg_location": "10.834166417753998,106.6343370505518",
     "capacity": 1800,
-    "filled": 80,
+    "filled": 95,
     "state": "FREE",
     "depot_id": 3
   },
@@ -245,7 +245,7 @@
     "area": 4,
     "gg_location": "10.819973514616683,106.63334086870958",
     "capacity": 1750,
-    "filled": 30,
+    "filled": 70,
     "state": "FREE",
     "depot_id": 3
   },
@@ -255,7 +255,7 @@
     "area": 4,
     "gg_location": "10.809974527969523,106.62340670266187",
     "capacity": 1750,
-    "filled": 84,
+    "filled": 94,
     "state": "FREE",
     "depot_id": 3
   },
@@ -265,7 +265,7 @@
     "area": 4,
     "gg_location": "10.796555275924435,106.62365509074814",
     "capacity": 1800,
-    "filled": 71,
+    "filled": 44,
     "state": "FREE",
     "depot_id": 3
   },
@@ -275,7 +275,7 @@
     "area": 4,
     "gg_location": "10.796189287934556,106.64017294004142",
     "capacity": 1800,
-    "filled": 99,
+    "filled": 100,
     "state": "FREE",
     "depot_id": 3
   },
@@ -285,7 +285,7 @@
     "area": 4,
     "gg_location": "10.783270198286601,106.64685326348427",
     "capacity": 1800,
-    "filled": 93,
+    "filled": 91,
     "state": "FREE",
     "depot_id": 3
   },
@@ -295,7 +295,7 @@
     "area": 4,
     "gg_location": "10.77450409153106,106.65659287912464",
     "capacity": 1700,
-    "filled": 75,
+    "filled": 93,
     "state": "FREE",
     "depot_id": 3
   },
@@ -305,7 +305,7 @@
     "area": 4,
     "gg_location": "10.78081301388765,106.66977901081457",
     "capacity": 1700,
-    "filled": 92,
+    "filled": 88,
     "state": "FREE",
     "depot_id": 4
   },
@@ -315,7 +315,7 @@
     "area": 4,
     "gg_location": "10.769691169408903,106.66867749618883",
     "capacity": 1750,
-    "filled": 30,
+    "filled": 82,
     "state": "FREE",
     "depot_id": 4
   },
@@ -325,7 +325,7 @@
     "area": 4,
     "gg_location": "10.77944225133996,106.6778066116835",
     "capacity": 1800,
-    "filled": 78,
+    "filled": 72,
     "state": "FREE",
     "depot_id": 4
   },
@@ -335,7 +335,7 @@
     "area": 4,
     "gg_location": "10.790265289966419,106.68882425853936",
     "capacity": 1700,
-    "filled": 69,
+    "filled": 86,
     "state": "FREE",
     "depot_id": 4
   },
@@ -345,7 +345,7 @@
     "area": 4,
     "gg_location": "10.774266033641405,106.7048707901689",
     "capacity": 1800,
-    "filled": 55,
+    "filled": 73,
     "state": "FREE",
     "depot_id": 4
   },
@@ -355,7 +355,7 @@
     "area": 4,
     "gg_location": "10.79011620993739,106.66959946651625",
     "capacity": 1750,
-    "filled": 62,
+    "filled": 76,
     "state": "FREE",
     "depot_id": 4
   },
@@ -365,7 +365,7 @@
     "area": 4,
     "gg_location": "10.798554974221377,106.65241792255365",
     "capacity": 1750,
-    "filled": 93,
+    "filled": 87,
     "state": "FREE",
     "depot_id": 4
   },
@@ -375,7 +375,7 @@
     "area": 4,
     "gg_location": "10.799386415307625,106.66867749596429",
     "capacity": 1800,
-    "filled": 97,
+    "filled": 96,
     "state": "FREE",
     "depot_id": 4
   },
@@ -385,7 +385,7 @@
     "area": 4,
     "gg_location": "10.810339725985505,106.66166809233586",
     "capacity": 1700,
-    "filled": 87,
+    "filled": 76,
     "state": "FREE",
     "depot_id": 4
   },
@@ -395,7 +395,7 @@
     "area": 4,
     "gg_location": "10.813719283605023,106.66611445325537",
     "capacity": 1800,
-    "filled": 68,
+    "filled": 54,
     "state": "FREE",
     "depot_id": 4
   },
@@ -405,7 +405,7 @@
     "area": 4,
     "gg_location": "10.818933181461134,106.67665396223815",
     "capacity": 1850,
-    "filled": 22,
+    "filled": 87,
     "state": "FREE",
     "depot_id": 5
   },
@@ -415,7 +415,7 @@
     "area": 4,
     "gg_location": "10.822551518124634,106.67323693643779",
     "capacity": 1800,
-    "filled": 20,
+    "filled": 69,
     "state": "FREE",
     "depot_id": 5
   },
@@ -425,7 +425,7 @@
     "area": 4,
     "gg_location": "10.834762827021926,106.66465476919211",
     "capacity": 1750,
-    "filled": 29,
+    "filled": 86,
     "state": "FREE",
     "depot_id": 5
   },
@@ -435,7 +435,7 @@
     "area": 4,
     "gg_location": "10.845060888508963,106.6723502952513",
     "capacity": 1800,
-    "filled": 71,
+    "filled": 99,
     "state": "FREE",
     "depot_id": 5
   },
@@ -445,7 +445,7 @@
     "area": 4,
     "gg_location": "10.856870155936656,106.68649082412067",
     "capacity": 1850,
-    "filled": 96,
+    "filled": 56,
     "state": "FREE",
     "depot_id": 5
   },
@@ -455,7 +455,7 @@
     "area": 4,
     "gg_location": "10.867954693902137,106.69179024850736",
     "capacity": 1800,
-    "filled": 80,
+    "filled": 91,
     "state": "FREE",
     "depot_id": 5
   },
@@ -465,7 +465,7 @@
     "area": 4,
     "gg_location": "10.875394726120344,106.68414719808598",
     "capacity": 1750,
-    "filled": 79,
+    "filled": 89,
     "state": "FREE",
     "depot_id": 5
   },
@@ -475,7 +475,7 @@
     "area": 4,
     "gg_location": "10.895211958695404,106.68475059701248",
     "capacity": 1850,
-    "filled": 90,
+    "filled": 74,
     "state": "FREE",
     "depot_id": 5
   },
@@ -485,7 +485,7 @@
     "area": 4,
     "gg_location": "10.89202545352392,106.67743372713944",
     "capacity": 1800,
-    "filled": 80,
+    "filled": 98,
     "state": "FREE",
     "depot_id": 5
   },
@@ -495,7 +495,7 @@
     "area": 4,
     "gg_location": "10.897588175177713,106.69923472314332",
     "capacity": 1750,
-    "filled": 97,
+    "filled": 44,
     "state": "FREE",
     "depot_id": 5
   },
@@ -506,7 +506,7 @@
     "depot_id": 6,
     "gg_location": "10.758880,106.652804",
     "capacity": 1750,
-    "filled": 91,
+    "filled": 89,
     "state": "FREE"
   },
   {
@@ -516,7 +516,7 @@
     "depot_id": 6,
     "gg_location": "10.761070,106.668240",
     "capacity": 1800,
-    "filled": 83,
+    "filled": 92,
     "state": "FREE"
   },
   {
@@ -526,7 +526,7 @@
     "depot_id": 6,
     "gg_location": "10.750259,106.658731",
     "capacity": 1800,
-    "filled": 100,
+    "filled": 96,
     "state": "FREE"
   },
   {
@@ -536,7 +536,7 @@
     "depot_id": 6,
     "gg_location": "10.771821,106.673428",
     "capacity": 1750,
-    "filled": 70,
+    "filled": 86,
     "state": "FREE"
   },
   {
@@ -546,7 +546,7 @@
     "depot_id": 6,
     "gg_location": "10.782036,106.673065",
     "capacity": 1800,
-    "filled": 81,
+    "filled": 71,
     "state": "FREE"
   },
   {
@@ -556,7 +556,7 @@
     "depot_id": 6,
     "gg_location": "10.758908,106.675878",
     "capacity": 1750,
-    "filled": 92,
+    "filled": 84,
     "state": "FREE"
   },
   {
@@ -566,7 +566,7 @@
     "depot_id": 6,
     "gg_location": "10.773427,106.688884",
     "capacity": 1800,
-    "filled": 53,
+    "filled": 85,
     "state": "FREE"
   },
   {
@@ -576,7 +576,7 @@
     "depot_id": 6,
     "gg_location": "10.760488,106.689116",
     "capacity": 1800,
-    "filled": 75,
+    "filled": 93,
     "state": "FREE"
   },
   {
@@ -586,7 +586,7 @@
     "depot_id": 6,
     "gg_location": "10.762693,106.700785",
     "capacity": 1700,
-    "filled": 75,
+    "filled": 83,
     "state": "FREE"
   },
   {
@@ -596,7 +596,7 @@
     "depot_id": 6,
     "gg_location": "10.771834,106.701538",
     "capacity": 1800,
-    "filled": 97,
+    "filled": 85,
     "state": "FREE"
   },
   {
@@ -606,7 +606,7 @@
     "depot_id": 7,
     "gg_location": "10.782385,106.700416",
     "capacity": 1750,
-    "filled": 95,
+    "filled": 83,
     "state": "FREE"
   },
   {
@@ -616,7 +616,7 @@
     "depot_id": 7,
     "gg_location": "10.794866,106.705738",
     "capacity": 1700,
-    "filled": 79,
+    "filled": 74,
     "state": "FREE"
   },
   {
@@ -626,7 +626,7 @@
     "depot_id": 7,
     "gg_location": "10.787303,106.712077",
     "capacity": 1800,
-    "filled": 41,
+    "filled": 77,
     "state": "FREE"
   },
   {
@@ -636,7 +636,7 @@
     "depot_id": 7,
     "gg_location": "10.788718,106.714876",
     "capacity": 1800,
-    "filled": 29,
+    "filled": 79,
     "state": "FREE"
   },
   {
@@ -646,7 +646,7 @@
     "depot_id": 7,
     "gg_location": "10.797616,106.725421",
     "capacity": 1700,
-    "filled": 73,
+    "filled": 79,
     "state": "FREE"
   },
   {
@@ -656,7 +656,7 @@
     "depot_id": 7,
     "gg_location": "10.802891,106.713531",
     "capacity": 1800,
-    "filled": 83,
+    "filled": 72,
     "state": "FREE"
   },
   {
@@ -666,7 +666,7 @@
     "depot_id": 7,
     "gg_location": "10.807758,106.720785",
     "capacity": 1800,
-    "filled": 66,
+    "filled": 75,
     "state": "FREE"
   },
   {
@@ -676,7 +676,7 @@
     "depot_id": 7,
     "gg_location": "10.817153,106.718222",
     "capacity": 1750,
-    "filled": 80,
+    "filled": 47,
     "state": "FREE"
   },
   {
@@ -686,7 +686,7 @@
     "depot_id": 7,
     "gg_location": "10.824742,106.733431",
     "capacity": 1750,
-    "filled": 85,
+    "filled": 99,
     "state": "FREE"
   },
   {
@@ -696,7 +696,7 @@
     "depot_id": 7,
     "gg_location": "10.815578,106.745001",
     "capacity": 1800,
-    "filled": 36,
+    "filled": 87,
     "state": "FREE"
   },
   {
@@ -706,7 +706,7 @@
     "depot_id": 7,
     "gg_location": "10.829137,106.748912",
     "capacity": 1750,
-    "filled": 75,
+    "filled": 93,
     "state": "FREE"
   },
   {
@@ -716,7 +716,7 @@
     "depot_id": 8,
     "gg_location": "10.762617,106.640302",
     "capacity": 1700,
-    "filled": 99,
+    "filled": 91,
     "state": "FREE"
   },
   {
@@ -726,7 +726,7 @@
     "depot_id": 8,
     "gg_location": "10.750589,106.641753",
     "capacity": 1700,
-    "filled": 79,
+    "filled": 96,
     "state": "FREE"
   },
   {
@@ -736,7 +736,7 @@
     "depot_id": 8,
     "gg_location": "10.737178,106.638288",
     "capacity": 1750,
-    "filled": 92,
+    "filled": 96,
     "state": "FREE"
   },
   {
@@ -746,7 +746,7 @@
     "depot_id": 8,
     "gg_location": "10.737418,106.627222",
     "capacity": 1700,
-    "filled": 91,
+    "filled": 73,
     "state": "FREE"
   },
   {
@@ -756,7 +756,7 @@
     "depot_id": 8,
     "gg_location": "10.752534,106.628605",
     "capacity": 1800,
-    "filled": 92,
+    "filled": 99,
     "state": "FREE"
   },
   {
@@ -766,7 +766,7 @@
     "depot_id": 8,
     "gg_location": "10.763815,106.627241",
     "capacity": 1800,
-    "filled": 83,
+    "filled": 32,
     "state": "FREE"
   },
   {
@@ -776,7 +776,7 @@
     "depot_id": 8,
     "gg_location": "10.769826,106.613113",
     "capacity": 1700,
-    "filled": 70,
+    "filled": 93,
     "state": "FREE"
   },
   {
@@ -786,7 +786,7 @@
     "depot_id": 8,
     "gg_location": "10.759871,106.617461",
     "capacity": 1800,
-    "filled": 100,
+    "filled": 91,
     "state": "FREE"
   },
   {
@@ -796,7 +796,7 @@
     "depot_id": 8,
     "gg_location": "10.749716,106.611822",
     "capacity": 1800,
-    "filled": 77,
+    "filled": 88,
     "state": "FREE"
   },
   {
@@ -806,7 +806,7 @@
     "depot_id": 8,
     "gg_location": "10.733739,106.612407",
     "capacity": 1700,
-    "filled": 81,
+    "filled": 82,
     "state": "FREE"
   },
   {
@@ -816,7 +816,7 @@
     "depot_id": 8,
     "gg_location": "10.721037,106.607627",
     "capacity": 1750,
-    "filled": 32,
+    "filled": 83,
     "state": "FREE"
   },
   {
@@ -826,7 +826,7 @@
     "depot_id": 9,
     "gg_location": "10.758243,106.715273",
     "capacity": 1700,
-    "filled": 80,
+    "filled": 100,
     "state": "FREE"
   },
   {
@@ -836,7 +836,7 @@
     "depot_id": 9,
     "gg_location": "10.753157,106.703896",
     "capacity": 1750,
-    "filled": 85,
+    "filled": 58,
     "state": "FREE"
   },
   {
@@ -856,7 +856,7 @@
     "depot_id": 9,
     "gg_location": "10.750481,106.712090",
     "capacity": 1800,
-    "filled": 74,
+    "filled": 46,
     "state": "FREE"
   },
   {
@@ -866,7 +866,7 @@
     "depot_id": 9,
     "gg_location": "10.729462,106.702081",
     "capacity": 1700,
-    "filled": 75,
+    "filled": 81,
     "state": "FREE"
   },
   {
@@ -876,7 +876,7 @@
     "depot_id": 9,
     "gg_location": "10.733618,106.695951",
     "capacity": 1750,
-    "filled": 24,
+    "filled": 35,
     "state": "FREE"
   },
   {
@@ -886,7 +886,7 @@
     "depot_id": 9,
     "gg_location": "10.751371,106.691007",
     "capacity": 1750,
-    "filled": 96,
+    "filled": 62,
     "state": "FREE"
   },
   {
@@ -896,7 +896,7 @@
     "depot_id": 9,
     "gg_location": "10.736444,106.710397",
     "capacity": 1700,
-    "filled": 97,
+    "filled": 83,
     "state": "FREE"
   },
   {
@@ -906,7 +906,7 @@
     "depot_id": 9,
     "gg_location": "10.752975,106.687972",
     "capacity": 1800,
-    "filled": 82,
+    "filled": 73,
     "state": "FREE"
   },
   {
@@ -916,7 +916,7 @@
     "depot_id": 9,
     "gg_location": "10.738051,106.726213",
     "capacity": 1700,
-    "filled": 46,
+    "filled": 48,
     "state": "FREE"
   },
   {
@@ -926,7 +926,7 @@
     "depot_id": 10,
     "gg_location": "10.779125,106.713191",
     "capacity": 1800,
-    "filled": 75,
+    "filled": 82,
     "state": "FREE"
   },
   {
@@ -936,7 +936,7 @@
     "depot_id": 10,
     "gg_location": "10.768695,106.712328",
     "capacity": 1750,
-    "filled": 56,
+    "filled": 83,
     "state": "FREE"
   },
   {
@@ -946,7 +946,7 @@
     "depot_id": 10,
     "gg_location": "10.765093,106.727311",
     "capacity": 1700,
-    "filled": 44,
+    "filled": 77,
     "state": "FREE"
   },
   {
@@ -956,7 +956,7 @@
     "depot_id": 10,
     "gg_location": "10.777464,106.727495",
     "capacity": 1800,
-    "filled": 50,
+    "filled": 89,
     "state": "FREE"
   },
   {
@@ -966,7 +966,7 @@
     "depot_id": 10,
     "gg_location": "10.795370,106.730410",
     "capacity": 1750,
-    "filled": 70,
+    "filled": 78,
     "state": "FREE"
   },
   {
@@ -976,7 +976,7 @@
     "depot_id": 10,
     "gg_location": "10.800635,106.744206",
     "capacity": 1750,
-    "filled": 73,
+    "filled": 97,
     "state": "FREE"
   },
   {
@@ -986,7 +986,7 @@
     "depot_id": 10,
     "gg_location": "10.787048,106.741562",
     "capacity": 1800,
-    "filled": 89,
+    "filled": 86,
     "state": "FREE"
   },
   {
@@ -996,7 +996,7 @@
     "depot_id": 10,
     "gg_location": "10.787686,106.753289",
     "capacity": 1700,
-    "filled": 87,
+    "filled": 100,
     "state": "FREE"
   },
   {
@@ -1006,7 +1006,7 @@
     "depot_id": 10,
     "gg_location": "10.776457,106.755071",
     "capacity": 1750,
-    "filled": 65,
+    "filled": 98,
     "state": "FREE"
   },
   {
@@ -1016,7 +1016,7 @@
     "depot_id": 10,
     "gg_location": "10.778020,106.745428",
     "capacity": 1700,
-    "filled": 74,
+    "filled": 80,
     "state": "FREE"
   }
 ]

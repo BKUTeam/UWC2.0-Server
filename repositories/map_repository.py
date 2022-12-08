@@ -56,8 +56,9 @@ class MapRepository:
         return None
 
     # ###### GET BY DEPOT ID - get resource at depot
-    def get_mcps_of_depot(self, depot_id):
-        return [mcp for mcp in MapRepository.resource(self.mcps_path) if mcp['depot_id'] == depot_id]
+    def get_mcps_of_depot(self, depot_id, filled_threshold=0):
+        return [mcp for mcp in MapRepository.resource(self.mcps_path)
+                if mcp['depot_id'] == depot_id and mcp['filled'] > filled_threshold]
 
     def get_collectors_of_depot(self, depot_id):
         return [collector for collector in MapRepository.resource(self.collectors_path)

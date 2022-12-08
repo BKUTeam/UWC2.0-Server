@@ -6,7 +6,7 @@
     "Weight": 6,
     "depot_id": 1,
     "gg_location": "10.79216864217754,106.58160680344825",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "NON_DRIVER",
     "collector_id": 1
   },
@@ -17,7 +17,7 @@
     "Weight": 6,
     "depot_id": 1,
     "gg_location": "10.881117564459464,106.63198455297686",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 1
   },
@@ -28,7 +28,7 @@
     "Weight": 6,
     "depot_id": 2,
     "gg_location": "10.881117564459464,106.63198455297686",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "HAD_DRIVER",
     "collector_id": 5
   },
@@ -39,7 +39,7 @@
     "Weight": 6,
     "depot_id": 2,
     "gg_location": "10.901420712262409,106.62498279930146",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 3
   },
@@ -50,7 +50,7 @@
     "Weight": 6,
     "depot_id": 3,
     "gg_location": "10.831609712517988,106.67425172331482",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "HAD_DRIVER",
     "collector_id": 8
   },
@@ -61,7 +61,7 @@
     "Weight": 6,
     "depot_id": 3,
     "gg_location": "10.843265487421593,106.63244717768472",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 6
   },
@@ -72,7 +72,7 @@
     "Weight": 6,
     "depot_id": 4,
     "gg_location": "10.769691169408903,106.66867749618883",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 4
   },
@@ -83,7 +83,7 @@
     "Weight": 6,
     "depot_id": 4,
     "gg_location": "10.799386415307625,106.66867749596429",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 9
   },
@@ -94,7 +94,7 @@
     "Weight": 6,
     "depot_id": 5,
     "gg_location": "10.881747899309365,106.70603999532895",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "NON_DRIVER",
     "collector_id": 6
   },
@@ -105,7 +105,7 @@
     "Weight": 6,
     "depot_id": 5,
     "gg_location": "10.867954693902137,106.69179024850736",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 7
   },
@@ -116,7 +116,7 @@
     "Weight": 6,
     "depot_id": 6,
     "gg_location": "10.765242056210962,106.66195651554142",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "RETURN",
     "collector_id": 14
   },
@@ -127,7 +127,7 @@
     "Weight": 6,
     "depot_id": 6,
     "gg_location": "10.762842,106.682490",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "HAD_DRIVER",
     "collector_id": 18
   },
@@ -138,7 +138,7 @@
     "Weight": 6,
     "depot_id": 7,
     "gg_location": "10.787303,106.712077",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 21
   },
@@ -149,7 +149,7 @@
     "Weight": 6,
     "depot_id": 7,
     "gg_location": "10.794882,106.721862",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "HAD_DRIVER",
     "collector_id": 28
   },
@@ -160,7 +160,7 @@
     "Weight": 6,
     "depot_id": 8,
     "gg_location": "10.751328,106.621532",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "HAD_DRIVER",
     "collector_id": 32
   },
@@ -171,7 +171,7 @@
     "Weight": 6,
     "depot_id": 8,
     "gg_location": "10.734976278314425,106.63537603525646",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "RETURN",
     "collector_id": "NULL"
   },
@@ -182,7 +182,7 @@
     "Weight": 6,
     "depot_id": 9,
     "gg_location": "10.734003,106.696922",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "NON_DRIVER",
     "collector_id": "NULL"
   },
@@ -193,7 +193,7 @@
     "Weight": 6,
     "depot_id": 9,
     "gg_location": "10.734003,106.696922",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "NON_DRIVER",
     "collector_id": "NULL"
   },
@@ -204,7 +204,7 @@
     "Weight": 6,
     "depot_id": 10,
     "gg_location": "10.776457,106.755071",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "IN_ROUTE",
     "collector_id": 54
   },
@@ -215,7 +215,7 @@
     "Weight": 6,
     "depot_id": 10,
     "gg_location": "10.796055,106.740169",
-    "capacity": 4000,
+    "capacity": 3600,
     "state": "NON_DRIVER",
     "collector_id": "NULL"
   }

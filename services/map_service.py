@@ -1,8 +1,10 @@
+from locals import Locals
 from map_processing_system.elements.route import OptimizeRoute, StoredRoute, StoredRouteState
 from map_processing_system.map_processing import MapProcessing
 from repositories.map_repository import MapRepository
 from repositories.user_repository import UserRepository
 import traceback
+
 
 class MapService:
 
@@ -15,7 +17,8 @@ class MapService:
         self.user_repository = user_repository
 
     # ###### Route involved method
-    def get_optimize_routes_for_collector_v2(self, collector_id: int, more_route=False):
+    def get_optimize_routes_for_collector_v2(self, collector_id: int, low_threshold: bool = False,
+                                             more_route: bool = False):
         try:
             collector = self.user_repository.get_collector_by_id(collector_id)
 
@@ -32,16 +35,32 @@ class MapService:
                 # Use mcp pool here
                 vehicle = self.map_repository.get_vehicle_by_id(vehicle_id)
                 vehicle_capacities = [vehicle['capacity']] * 2
+
+                # TODO: Get routes
                 all_routes = self.map_processing.get_more_optimize_routes(depot_id, vehicle_capacities)
             else:
-                # Return available route in last request
-                routes = StoredRoute.get_free_routes_of_collector(collector_id)
-                if len(routes) > 0:
-                    return [route.opt_route for route in routes]
+                if not low_threshold:
+                    # Return available route in last request
+                    routes = StoredRoute.get_free_routes_of_collector(collector_id)
+                    if len(routes) > 0:
+                        return [route.opt_route for route in routes]
 
                 vehicle = self.map_repository.get_vehicle_by_id(vehicle_id)
+
+                # TODO: Bug here, when number of mcps < 1.5 * len two routes, hell routes
+                # Duplicate vehicle to get more routes, depend on exceeded_mcps
+                # mcp_filled_threshold = Locals.load_config()['mcp_filled_threshold']
+                # vehicle_capacities = [vehicle['capacity']]
+                # exceeded_mcps = self.map_repository.get_mcps_of_depot(depot_id, mcp_filled_threshold)
+                # if len(exceeded_mcps) >= 6:
+                #     vehicle_capacities = [vehicle['capacity']] * 2
+
+                # Default, without smart choice
                 vehicle_capacities = [vehicle['capacity']] * 2
-                all_routes = self.map_processing.get_optimize_routes_of_depot(depot_id, vehicle_capacities)
+
+                # TODO: Get routes
+                all_routes \
+                    = self.map_processing.get_optimize_routes_of_depot(depot_id, vehicle_capacities, low_threshold)
 
             for opt_route in all_routes:
                 StoredRoute.store_route(opt_route, depot_id, ('ORIGIN' if not more_route else 'OPTIONAL'), collector_id)

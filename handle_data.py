@@ -2,6 +2,9 @@ import json
 import random
 
 from locals import Locals
+from repositories.map_repository import MapRepository
+from repositories.user_repository import UserRepository
+from utils import print_scenario
 
 
 def reset_data():
@@ -31,13 +34,18 @@ def reset_data():
 
 
 def handle_filled_mcps():
+    """
+    This method use to set up data with specific scenario
+
+    """
+
     with open('./data/mcps.JSON', "r+") as f:
         mcps = json.load(f)
 
-    exceeded_percent = 0.7
-    exceeded_mcp_percent = 0.8
+    exceeded_percent = 0.8
+    exceeded_mcp_percent = 0.9
     filled_threshold = Locals.load_config()['mcp_filled_threshold']
-    exceeded_mcp_percent_2 = 0.8
+    exceeded_mcp_percent_2 = 0.6
 
     for mcp in mcps:
         ran_num = random.random()
@@ -47,18 +55,20 @@ def handle_filled_mcps():
             if ran_mcp < exceeded_mcp_percent:
                 mcp['filled'] = random.randint(filled_threshold, 100)
             else:
-                mcp['filled'] = random.randint(20, filled_threshold)
+                mcp['filled'] = random.randint(30, filled_threshold)
 
         else:
             ran_mcp = random.random()
             if ran_mcp > exceeded_mcp_percent_2:
                 mcp['filled'] = random.randint(filled_threshold, 100)
             else:
-                mcp['filled'] = random.randint(20, filled_threshold)
+                mcp['filled'] = random.randint(30, filled_threshold)
 
         with open("./data/mcps.JSON", "w") as f:
             json.dump(mcps, f, indent=2)
 
 
 if __name__ == "__main__":
-    handle_filled_mcps()
+    # reset_data()
+    # handle_filled_mcps()
+    print_scenario(MapRepository(), UserRepository())

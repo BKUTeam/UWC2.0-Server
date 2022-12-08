@@ -52,8 +52,10 @@ if __name__ == "__main__":
     start = time()
     for col in collectors:
 
-        routes: list[OptimizeRoute] = map_service.get_optimize_routes_for_collector(collector_id=col['id'])
+        routes: list[OptimizeRoute] = map_service.get_optimize_routes_for_collector_v2(collector_id=col['id'])
         print("\n\n--------------------------------- Col id: {} ---------------------------------\n".format(col['id']))
+        if isinstance(routes, str):
+            print(routes)
         for index, route in enumerate(routes):
             count_route += 1
             route_info = route.get_route_info()
