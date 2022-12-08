@@ -6,11 +6,14 @@
 pip install -r requirement.txt
 ```
 ### Make use that you have .env file for config
-The .env require:
+The **.env** file require:
 ```
 GOOGLE_API_KEY=<YOUR GOOGLE API KEY>
 MAPBOX_API_KEY=<YOUR MAPBOX API KEY>
 API_TYPE=MAPBOX | GOOGLE
+MCP_FILLED_THRESHOLD=70
+MCP_FILLED_THRESHOLD_LOW=30
+DEFAULT_LOADED_PERCENT=70
 ```
 About the api type, we recommend using mapbox, it's easy to register than google api
 
