@@ -153,7 +153,7 @@ class CollectorRoute(Resource):
 class Janitor(Resource):
 
     def get(self):
-        janitors = user_service.get_short_information_of_all_collector()
+        janitors = user_service.get_short_information_of_all_janitor()
         return janitors
 
     def post(self):
