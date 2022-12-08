@@ -17,6 +17,11 @@ class UserRepository:
             resource = json.load(f)
         return resource
 
+    @staticmethod
+    def update_resource(file_path, data):
+        with open(file_path, 'w+') as f:
+            json.dump(data, f, indent=2)
+
     # ###### GET ALL - collector, janitor
     def get_all_collectors(self):
         return UserRepository.resource(self.collectors_path)
@@ -74,8 +79,15 @@ class UserRepository:
             if janitor.get('id') == janitor_id:
                 janitor['depot_id'] = depot_id
                 break
-
         with open(self.janitors_path, 'w+') as f:
             json.dump(janitors, f, indent=2)
-
         return True
+
+    def update_state_of_collector(self, collector_id, state):
+        collectors = self.resource(self.collectors_path)
+        for col in collectors:
+            if col.get('id') == collector_id:
+                col['state'] = state
+                UserRepository.update_resource(self.collectors_path, collectors)
+                return True
+        return False

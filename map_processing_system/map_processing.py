@@ -1,5 +1,6 @@
 import json
 
+import uwc_logging
 from map_processing_system.elements.route import OptimizeRoute
 from map_processing_system.elements.route_node import OptimizeRouteNode
 from map_processing_system.directions_api import DirectionsAPI
@@ -35,7 +36,7 @@ class MapProcessing:
 
     def merge_pool_to_working_mcp(self):
         mcps = self.map_repo.get_all_mcps()
-        self.working_mcps.append([mcp for mcp in mcps if mcp['id'] in self.mcp_pool])
+        self.working_mcps += [mcp for mcp in mcps if mcp['id'] in self.mcp_pool and mcp['state'] == 'FREE']
 
     def get_list_id(self, list_node):
         return [node['id'] for node in list_node]
@@ -99,7 +100,8 @@ class MapProcessing:
                 OptimizeRouteNode(
                     id=depot['id'],
                     location=depot['gg_location'],
-                    reached_distance=DirectionsAPI.get_distance([factory.location, depot['gg_location']]),
+                    reached_distance=DirectionsAPI.get_distance(
+                        [factory.location, depot['gg_location']])['routes'][0]['distance'],
                     loaded=0,
                     type=depot['type']
                 )
@@ -124,7 +126,7 @@ class MapProcessing:
                 offset += 1
         num_factories = len(list_node) - offset
 
-        list_mcps = []
+        list_picked_mcps = []
         list_factories = []
         for route in routes:
             for index, node in enumerate(route):
@@ -136,7 +138,9 @@ class MapProcessing:
                     list_factories.append(list_node[node.index])
                 else:
                     # Mcp here
-                    list_mcps.append(list_node[node.index])
+                    list_picked_mcps.append(list_node[node.index])
+
+        list_mcps = [node for node in list_node if node.get('type') == 'MCP' and node not in list_picked_mcps]
 
         return list_mcps + list_factories
 
@@ -246,23 +250,30 @@ class MapProcessing:
             list_optimize_route.append(opt_route)
         return list_optimize_route
 
-    def get_optimize_routes_of_depot(self, depot_id: int):
+    def get_optimize_routes_of_depot(self, depot_id: int, vehicle_capacities=None):
         depot = self.map_repo.get_depot_by_id(depot_id)
-        vehicles = self.map_repo.get_vehicles_of_depot(depot_id)
         self.set_up_working_mcp(depot_id)
+
+        if vehicle_capacities is not None:
+            vehicles = [{'capacity': v_c} for v_c in vehicle_capacities]
+        else:
+            vehicles = self.map_repo.get_vehicles_of_depot(depot_id)
+
         return self.get_optimize_routes(depot, vehicles)
 
-    def get_more_optimize_routes(self, depot_id, vehicle_id):
+    def get_more_optimize_routes(self, depot_id, vehicle_capacities=None):
         self.set_up_working_mcp(depot_id)
 
         UwcLogger.add_info_log("MCP Pool", "Using mcp pool, previous length: {}".format(len(self.mcp_pool)))
         self.merge_pool_to_working_mcp()
-        vehicles = [self.map_repo.get_vehicle_by_id(vehicle_id)]
-        if vehicles[0] is None:
-            return None
+
+        if vehicle_capacities is not None:
+            vehicles = [{'capacity': v_c} for v_c in vehicle_capacities]
         else:
-            vehicles *= 3
-        optimize_routes = self.get_optimize_routes(depot_id, vehicles)
+            vehicles = self.map_repo.get_vehicles_of_depot(depot_id)
+
+        depot = self.map_repo.get_depot_by_id(depot_id)
+        optimize_routes = self.get_optimize_routes(depot, vehicles)
 
         # update pool
         picked_mcps = []
@@ -282,3 +293,8 @@ class MapProcessing:
         self.map_repo.update_mcp_in_route(picked_mcps)
 
         return "success"
+
+    def merge_pool_from_depot(self, depot_id):
+        mcps = self.map_repo.get_mcps_of_depot(depot_id)
+        self.mcp_pool += [mcp['id'] for mcp in mcps if mcp['state'] == 'FREE']
+        UwcLogger.add_info_log('MCP Pool', str(self.mcp_pool))

@@ -1,4 +1,5 @@
 import json
+import traceback
 
 from flask import Flask, request
 from flask_restful import reqparse, abort, Api, Resource
@@ -12,6 +13,8 @@ from repositories.user_repository import UserRepository
 from services.map_service import MapService
 from services.user_service import UserService
 from utils import print_scenario
+from handle_data import reset_data
+from uwc_logging import UwcLogger
 
 app = Flask(__name__)
 CORS(app, resources={r"*": {"origins": "*"}})
@@ -34,6 +37,8 @@ user_service = UserService(user_repository=user_repository)
 
 print_scenario(map_repo=map_repository, user_repo=user_repository)
 
+reset_data()
+
 
 # convert to json data
 def obj_dict(obj):
@@ -46,22 +51,43 @@ class RouteResource(Resource):
     def get(self):
         try:
             collector_id = int(request.args.get('collector-id'))
-            routes = map_service.get_optimize_routes_for_collector(collector_id)
+            mcp_pool_flag = str(request.args.get('use-mcp-pool')).lower()
+
+            if mcp_pool_flag == 'true':
+                results = map_service.get_optimize_routes_for_collector_v2(collector_id, True)
+            elif mcp_pool_flag == 'none' or mcp_pool_flag == 'false':
+                results = map_service.get_optimize_routes_for_collector_v2(collector_id)
+            else:
+                results = "[use-mcp-pool] option is invalid"
+
             collector = user_service.get_detail_collector_by_id(collector_id)
-            result = json.dumps({"routes": routes}, default=obj_dict)
+
+            if isinstance(results, list):
+                print(results)
+                result = json.dumps({"routes": results}, default=obj_dict)
+            else:
+                result = json.dumps({"message": results})
+
             return json.loads(result)
-        except Exception as e:
-            print(e)
-            return "INVALID"
+
+
+        except Exception as ex:
+            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            print(message)
+            print(ex, traceback.format_exc())
+            result = json.dumps({"message": message})
+            return json.loads(result)
 
     # assign route for collector id
     def post(self):
         try:
             collector_id = int(request.args.get('collector-id'))
             route_id = int(request.args.get('route-id'))
-            result = map_service.assign_route_for_collector(route_id, collector_id)
+            result = map_service.assign_route_for_collector_v2(route_id, collector_id)
             return result
-        except:
+        except Exception as e:
+            UwcLogger.add_error_log("Assign route", str(e))
             return "INVALID"
 
 

@@ -4,7 +4,7 @@ import random
 from locals import Locals
 
 
-def fix_mcps():
+def reset_data():
     with open('./data/mcps.JSON', "r+") as f:
         mcps = json.load(f)
 
@@ -17,7 +17,17 @@ def fix_mcps():
         for mcp in mcps:
             mcp['state'] = "FREE"
     with open("./data/mcps.JSON", "w") as f:
-        json.dump(mcps, f)
+        json.dump(mcps, f, indent=2)
+
+    with open('./data/collectors.JSON', "r+") as f:
+        collectors = json.load(f)
+
+        for col in collectors:
+            col.update({'state': 'FREE'})
+            col.update({'vehicle_id': random.randint(1, 20)})
+
+    with open("./data/collectors.JSON", "w") as f:
+        json.dump(collectors, f, indent=2)
 
 
 def handle_filled_mcps():
@@ -27,7 +37,7 @@ def handle_filled_mcps():
     exceeded_percent = 0.7
     exceeded_mcp_percent = 0.8
     filled_threshold = Locals.load_config()['mcp_filled_threshold']
-    exceeded_mcp_percent_2 = 0.6
+    exceeded_mcp_percent_2 = 0.8
 
     for mcp in mcps:
         ran_num = random.random()

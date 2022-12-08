@@ -59,6 +59,10 @@ class MapRepository:
     def get_mcps_of_depot(self, depot_id):
         return [mcp for mcp in MapRepository.resource(self.mcps_path) if mcp['depot_id'] == depot_id]
 
+    def get_collectors_of_depot(self, depot_id):
+        return [collector for collector in MapRepository.resource(self.collectors_path)
+                if collector['depot_id'] == depot_id]
+
     def get_vehicles_of_depot(self, depot_id):
         return [vehicle for vehicle in MapRepository.resource(self.vehicles_path) if vehicle['depot_id'] == depot_id]
 

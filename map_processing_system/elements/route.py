@@ -82,19 +82,56 @@ class StoredRoute:
     ID = -1
     all_routes = []
 
+    def __init__(self, id, depot_id: int, opt_route: OptimizeRoute, type, collector_id=-1):
+        self.id = id
+        self.opt_route = opt_route
+        self.depot_id = depot_id
+        self.collector_id: int = collector_id
+        self.vehicle_id: int = -1
+        self.state: StoredRouteState = StoredRouteState.FREE
+        self.type = type
+
+    def __str__(self):
+        return f'id: {self.id}\nopt_route: {self.opt_route}\ndepot_id: {self.depot_id}\n' \
+               f'collector_id: {self.collector_id}\n' \
+               f'vehicle_id: {self.vehicle_id}\nstate: {self.state}\ntype: {self.type}\n'
+
+    def assign_to(self, collector_id: int):
+        if self.state != StoredRouteState.FREE or self.collector_id != collector_id:
+            raise Exception('Can not assign for this route')
+
+        self.collector_id = collector_id
+        self.state = StoredRouteState.ASSIGNED
+        StoredRoute.print_all_routes("AFTER ASSIGN")
+
+    def release(self):
+        self.state = StoredRouteState.RELEASED
+        StoredRoute.print_all_routes("AFTER RELEASE")
+
+    @staticmethod
+    def print_all_routes(title):
+        print(f"\n\n----------------------------- {title}: Print all route -----------------------------\n")
+        for route in StoredRoute.all_routes:
+            print(str(route))
+            print('---------------------------------\n')
+        print("\n---------------------------------------------------------------------------\n\n")
+
     @staticmethod
     def get_id():
         StoredRoute.ID += 1
         return StoredRoute.ID
 
     @staticmethod
-    def store_route(opt_route: OptimizeRoute, depot_id, type):
+    def store_route(opt_route: OptimizeRoute, depot_id, type, collector_id=-1):
         """
         This method store route into db and generate id for opt_route
         """
         new_id = StoredRoute.get_id()
         opt_route.id = new_id
-        StoredRoute.all_routes.append(StoredRoute(new_id, depot_id, opt_route, type))
+        new_stored_route = StoredRoute(new_id, depot_id, opt_route, type, collector_id)
+        StoredRoute.all_routes.append(new_stored_route)
+        # print("New store route: " + str(new_stored_route))
+        StoredRoute.print_all_routes("AFTER STORE")
 
     @staticmethod
     def get_route_by_id(id):
@@ -105,27 +142,8 @@ class StoredRoute:
 
     @staticmethod
     def get_free_routes_by_depot_id(depot_id) -> list:
-        return [route.opt_route for route in StoredRoute.all_routes
+        return [route for route in StoredRoute.all_routes
                 if route.depot_id == depot_id and route.state == StoredRouteState.FREE]
-
-    def __init__(self, id, depot_id: int, opt_route: OptimizeRoute, type):
-        self.id = id
-        self.opt_route = opt_route
-        self.depot_id = depot_id
-        self.collector_id: int = -1
-        self.vehicle_id: int = -1
-        self.state: StoredRouteState = StoredRouteState.FREE
-        self.type = type
-
-    def assign_to(self, collector_id: int):
-        if self.state != StoredRouteState.FREE:
-            raise Exception('Can not assign for this route')
-
-        self.collector_id = collector_id
-        self.state = StoredRouteState.ASSIGNED
-
-    def release(self):
-        self.state = StoredRouteState.RELEASED
 
     @staticmethod
     def get_assigned_routes_by_depot_id(depot_id):
@@ -136,3 +154,8 @@ class StoredRoute:
     def get_assigned_routes_by_collector_id(collector_id):
         return [route.opt_route for route in StoredRoute.all_routes
                 if route.depot_id == collector_id and route.state == StoredRouteState.ASSIGNED]
+
+    @staticmethod
+    def get_free_routes_of_collector(collector_id):
+        return [route for route in StoredRoute.all_routes
+                if route.collector_id == collector_id and route.state == StoredRouteState.FREE]

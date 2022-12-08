@@ -2,7 +2,7 @@ from map_processing_system.elements.route import OptimizeRoute, StoredRoute, Sto
 from map_processing_system.map_processing import MapProcessing
 from repositories.map_repository import MapRepository
 from repositories.user_repository import UserRepository
-
+import traceback
 
 class MapService:
 
@@ -15,68 +15,100 @@ class MapService:
         self.user_repository = user_repository
 
     # ###### Route involved method
-    def get_optimize_routes_for_collector(self, collector_id: int, more_route=False):
-        collector = self.user_repository.get_collector_by_id(collector_id)
-        if collector is None:
-            return None
-        depot_id = collector['depot_id']
-        vehicle_id = collector['vehicle_id']
-        free_routes = StoredRoute.get_free_routes_by_depot_id(depot_id)
+    def get_optimize_routes_for_collector_v2(self, collector_id: int, more_route=False):
+        try:
+            collector = self.user_repository.get_collector_by_id(collector_id)
 
-        if len(free_routes) > 0:
-            return free_routes
+            if not collector:
+                return "Not found this collector"
 
-        if more_route:
-            all_routes = self.map_processing.get_more_optimize_routes(depot_id, vehicle_id)
-        else:
-            all_routes = self.map_processing.get_optimize_routes_of_depot(depot_id)
+            if collector.get('state') == 'BUSY':
+                return "The collector already has assigned route"
 
-        for opt_route in all_routes:
-            StoredRoute.store_route(opt_route, depot_id, type='ORIGIN' if not more_route else 'OPTIONAL')
-        return all_routes
+            depot_id = collector['depot_id']
+            vehicle_id = collector['vehicle_id']
 
-    def assign_route_for_collector(self, route_id, collector_id):
+            if more_route:
+                # Use mcp pool here
+                vehicle = self.map_repository.get_vehicle_by_id(vehicle_id)
+                vehicle_capacities = [vehicle['capacity']] * 2
+                all_routes = self.map_processing.get_more_optimize_routes(depot_id, vehicle_capacities)
+            else:
+                # Return available route in last request
+                routes = StoredRoute.get_free_routes_of_collector(collector_id)
+                if len(routes) > 0:
+                    return [route.opt_route for route in routes]
+
+                vehicle = self.map_repository.get_vehicle_by_id(vehicle_id)
+                vehicle_capacities = [vehicle['capacity']] * 2
+                all_routes = self.map_processing.get_optimize_routes_of_depot(depot_id, vehicle_capacities)
+
+            for opt_route in all_routes:
+                StoredRoute.store_route(opt_route, depot_id, ('ORIGIN' if not more_route else 'OPTIONAL'), collector_id)
+
+            return all_routes
+
+        except Exception as ex:
+            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            print(message)
+            print(ex, traceback.format_exc())
+            return message
+
+    def assign_route_for_collector_v2(self, route_id, collector_id):
         """
         This method assign route for collector \n
-        After assignment, if all collectors of the depot was assigned, release all free routes of the depot
-        Or release if type of route is 'OPTIONAL'.
+        After assignment, release all another route of the collector
 
         :param route_id:
         :param collector_id:
         :return: True if success, and vice versa
         """
-        route: StoredRoute = StoredRoute.get_route_by_id(route_id)
-        if route is None:
-            return False
         try:
+            collector = self.user_repository.get_collector_by_id(collector_id)
+
+            if not collector:
+                return "Not found this collector"
+
+            if collector.get('state') == 'BUSY':
+                return "The collector already has assigned route"
+
+            route: StoredRoute = StoredRoute.get_route_by_id(route_id)
+            if route is None:
+                return False
+
             route.assign_to(collector_id)
-        except Exception as e:
-            print(e)
+
+            self.map_processing.update_mcp_state_in_route(route.opt_route)
+            self.user_repository.update_state_of_collector(collector_id, 'BUSY')
+
+            routes = StoredRoute.get_free_routes_by_depot_id(collector['depot_id'])
+            for route in routes:
+                if route.id != route_id:
+                    self.release_route_v2(route)
+
+            # Check all collectors have routes -> update MCP pool if true
+            collectors_in_depot = self.map_repository.get_collectors_of_depot(depot_id=collector['depot_id'])
+            assigned_routes = StoredRoute.get_assigned_routes_by_depot_id(collector['depot_id'])
+            if len(assigned_routes) == len(collectors_in_depot):
+                self.map_processing.merge_pool_from_depot(collector['depot_id'])
+
+            return True
+        except Exception as ex:
+            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            print(message)
+            print(ex, traceback.format_exc())
             return False
 
-        self.map_processing.update_mcp_state_in_route(route.opt_route)
-        depot_id = route.depot_id
-        free_routes: list[StoredRoute] = StoredRoute.get_free_routes_by_depot_id(depot_id)
-        assigned_routes: list[StoredRoute] = StoredRoute.get_assigned_routes_by_depot_id(depot_id)
-        collectors = self.user_repository.get_collectors_of_depot(depot_id)
-
-        if len(collectors) == len(assigned_routes):
-            for free_route in free_routes:
-                self.release_route(free_route)
-        elif route.type == 'OPTIONAL':
-            for free_route in free_routes:
-                if free_route.type == 'OPTIONAL':
-                    self.release_route(free_route)
-        return True
-
-    def release_route(self, free_route: StoredRoute):
+    def release_route_v2(self, free_route: StoredRoute):
         """
         This method release a route, release Stored Route and release node into MCP Pool of Map Processing.
 
         :param free_route: StoredRoute has FREE state
         """
         free_route.release()
-        self.map_processing.release_redundant_route(free_route.opt_route)
+        # self.map_processing.release_redundant_route(free_route.opt_route)
 
     # ###### GET ALL mcp, depot, factory
     def get_all_mcps(self):

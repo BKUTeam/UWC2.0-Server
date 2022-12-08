@@ -8,8 +8,9 @@
     "phone_number": "0983477274",
     "address": "man utd",
     "birthplace": "Portugal",
-    "vehicle_id": 1,
-    "depot_id": 1
+    "vehicle_id": 7,
+    "depot_id": 1,
+    "state": "BUSY"
   },
   {
     "id": 2,
@@ -20,8 +21,9 @@
     "phone_number": "09142817442",
     "address": "psg",
     "birthplace": "Argentina",
-    "vehicle_id": 2,
-    "depot_id": 1
+    "vehicle_id": 6,
+    "depot_id": 1,
+    "state": "BUSY"
   },
   {
     "id": 3,
@@ -32,8 +34,9 @@
     "phone_number": "08294827442",
     "address": "psg",
     "birthplace": "Brazil",
-    "vehicle_id": 3,
-    "depot_id": 2
+    "vehicle_id": 8,
+    "depot_id": 2,
+    "state": "BUSY"
   },
   {
     "id": 4,
@@ -44,44 +47,48 @@
     "phone_number": "08297426722",
     "address": "ac milan",
     "birthplace": "Sweden",
-    "vehicle_id": 4,
-    "depot_id": 2
+    "vehicle_id": 19,
+    "depot_id": 2,
+    "state": "FREE"
   },
   {
     "id": 5,
-    "name": "Kylian Mbappé",
+    "name": "Kylian Mbapp\u00c3\u00a9",
     "age": 24,
     "gender": "male",
     "citizen_identification": "41248428749299",
     "phone_number": "09621746726",
     "address": "psg",
     "birthplace": "France",
-    "vehicle_id": 5,
-    "depot_id": 3
+    "vehicle_id": 13,
+    "depot_id": 3,
+    "state": "FREE"
   },
   {
     "id": 6,
-   "name": "Paul Pogba",
-    "age": 29 ,
+    "name": "Paul Pogba",
+    "age": 29,
     "gender": "female",
     "citizen_identification": "8192742847874",
     "phone_number": "086427627633",
     "address": "juventus",
     "birthplace": "France",
     "vehicle_id": 6,
-    "depot_id": 3
+    "depot_id": 3,
+    "state": "FREE"
   },
   {
     "id": 7,
     "name": "David de Gea",
-    "age": 32 ,
+    "age": 32,
     "gender": "male",
     "citizen_identification": "82372647292287",
     "phone_number": "09723636363",
     "address": "man utd",
     "birthplace": "Spain",
-    "vehicle_id": 7,
-    "depot_id": 4
+    "vehicle_id": 17,
+    "depot_id": 4,
+    "state": "FREE"
   },
   {
     "id": 8,
@@ -92,8 +99,9 @@
     "phone_number": "09217617642",
     "address": "liverpool",
     "birthplace": "Egypt",
-    "vehicle_id": 8,
-    "depot_id": 4
+    "vehicle_id": 7,
+    "depot_id": 4,
+    "state": "FREE"
   },
   {
     "id": 9,
@@ -104,8 +112,9 @@
     "phone_number": "09746274622",
     "address": "Tottenham",
     "birthplace": "Wales",
-    "vehicle_id": 9,
-    "depot_id": 5
+    "vehicle_id": 17,
+    "depot_id": 5,
+    "state": "FREE"
   },
   {
     "id": 10,
@@ -116,8 +125,9 @@
     "phone_number": "08826427627",
     "address": "psg",
     "birthplace": "Spain",
-    "vehicle_id": 10,
-    "depot_id": 5
+    "vehicle_id": 16,
+    "depot_id": 5,
+    "state": "FREE"
   },
   {
     "id": 11,
@@ -128,8 +138,9 @@
     "phone_number": "0983477274",
     "address": "man utd",
     "birthplace": "England",
-    "vehicle_id": 11,
-    "depot_id": 6
+    "vehicle_id": 16,
+    "depot_id": 6,
+    "state": "FREE"
   },
   {
     "id": 12,
@@ -140,8 +151,9 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "Brazil",
-    "vehicle_id": 12,
-    "depot_id": 6
+    "vehicle_id": 20,
+    "depot_id": 6,
+    "state": "FREE"
   },
   {
     "id": 13,
@@ -152,8 +164,9 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "France",
-    "vehicle_id": 13,
-    "depot_id": 7
+    "vehicle_id": 9,
+    "depot_id": 7,
+    "state": "FREE"
   },
   {
     "id": 14,
@@ -164,8 +177,9 @@
     "phone_number": "0848274264",
     "address": "man utd",
     "birthplace": "Brazil",
-    "vehicle_id": 14,
-    "depot_id": 7
+    "vehicle_id": 13,
+    "depot_id": 7,
+    "state": "FREE"
   },
   {
     "id": 15,
@@ -176,8 +190,9 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "German",
-    "vehicle_id": 15,
-    "depot_id": 8
+    "vehicle_id": 10,
+    "depot_id": 8,
+    "state": "FREE"
   },
   {
     "id": 16,
@@ -188,8 +203,9 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "France",
-    "vehicle_id": 16,
-    "depot_id": 8
+    "vehicle_id": 11,
+    "depot_id": 8,
+    "state": "FREE"
   },
   {
     "id": 17,
@@ -200,10 +216,10 @@
     "phone_number": "0983477274",
     "address": "Asenal",
     "birthplace": "German",
-    "vehicle_id": 17,
-    "depot_id": 9
+    "vehicle_id": 18,
+    "depot_id": 9,
+    "state": "FREE"
   },
-
   {
     "id": 19,
     "name": "Marcelo",
@@ -213,8 +229,9 @@
     "phone_number": "0983477274",
     "address": "real madrid",
     "birthplace": "Brazil",
-    "vehicle_id": 19,
-    "depot_id": 10
+    "vehicle_id": 7,
+    "depot_id": 10,
+    "state": "FREE"
   },
   {
     "id": 20,
@@ -225,7 +242,8 @@
     "phone_number": "0983477274",
     "address": "man utd",
     "birthplace": "France",
-    "vehicle_id": 20,
-    "depot_id": 10
+    "vehicle_id": 7,
+    "depot_id": 10,
+    "state": "FREE"
   }
 ]
