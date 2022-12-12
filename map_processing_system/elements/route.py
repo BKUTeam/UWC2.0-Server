@@ -153,7 +153,7 @@ class StoredRoute:
     @staticmethod
     def get_assigned_routes_by_collector_id(collector_id):
         return [route.opt_route for route in StoredRoute.all_routes
-                if route.depot_id == collector_id and route.state == StoredRouteState.ASSIGNED]
+                if route.collector_id == collector_id and route.state == StoredRouteState.ASSIGNED]
 
     @staticmethod
     def get_free_routes_of_collector(collector_id):

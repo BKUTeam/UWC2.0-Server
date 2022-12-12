@@ -76,7 +76,7 @@ class RouteResource(Resource):
                 print(result)
                 result = json.dumps({"routes": result}, default=obj_dict)
             else:
-                result = json.dumps({"message": result})
+                result = json.dumps({"message": result, "routes":[]})
 
             return json.loads(result)
 
