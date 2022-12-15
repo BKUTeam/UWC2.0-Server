@@ -1,5 +1,6 @@
 # UWC2.0-Server
 ## Source tree
+```
 UWC2.0-Server
 │   .env
 │   .gitignore
@@ -41,7 +42,7 @@ UWC2.0-Server
 ├───services
 │   │   map_service.py
 │   │   user_service.py
-
+```
 ## Init project
 ### Install all packages
 ```
@@ -67,7 +68,7 @@ You don't need to put all api keys, just the api key of type you are using
 
 ### To run the server
 Go to your command line, make sure you have **python 3.10** (this project are not working with lower version)
-```
+``` python
 python api.py
 ```
 ## API
