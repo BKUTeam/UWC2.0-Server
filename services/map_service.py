@@ -72,7 +72,13 @@ class MapService:
                     = self.map_processing.get_optimize_routes_of_depot(depot_id, vehicle_capacities, use_low_threshold)
 
             for opt_route in all_routes:
-                StoredRoute.store_route(opt_route, depot_id, ('ORIGIN' if not use_mcp_pool else 'OPTIONAL'), collector_id)
+                opt_route.vehicle_cap = vehicle['capacity']
+                StoredRoute.store_route(
+                    opt_route,
+                    depot_id,
+                    ('ORIGIN' if not use_mcp_pool else 'OPTIONAL'),
+                    collector_id
+                )
 
             return all_routes
 

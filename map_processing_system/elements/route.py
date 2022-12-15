@@ -10,6 +10,7 @@ class OptimizeRoute:
         self.list_node = list_node
         self.render_route = DirectionsAPI.get_distance([node.location for node in list_node])
         self.id = -1
+        self.vehicle_cap = -1
 
     def get_route_info(self):
         total_loaded_phase_1 = 0
